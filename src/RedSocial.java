@@ -43,5 +43,14 @@ public class RedSocial extends User {
         System.out.println("Nombre Red Social: "+ this.getNombreRs());
     }
 
+    //likes
+    
+    @Override
+    public void acumulaLike() {
+       System.out.println("El usuario: "+ super.getUsuario());
+       System.out.println("Tiene: "+ like + " likes");
+       System.out.println("Tiempo: "+ super.getTimpoConectado());
+    }
+
     
 }

@@ -43,4 +43,14 @@ public class Streaming extends User {
         System.out.println("Genero vizualizado: "+ this.getGenero());
     }
     
+    
+    // LIKES
+    
+    @Override
+    public void acumulaLike() {
+       System.out.println("El usuario: "+ super.getUsuario());
+       System.out.println("Tiene: "+ like + " likes");
+       System.out.println("Tiempo: "+ super.getTimpoConectado());
+    }
+
 }
