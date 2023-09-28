@@ -7,7 +7,7 @@
  *
  * @author pipeg
  */
-public class RedSocial extends User {
+public class RedSocial extends Interes implements Like {
     
     private String nombreRs;
 
@@ -15,8 +15,8 @@ public class RedSocial extends User {
         super();
     }
 
-    public RedSocial(String nombreRs, String usuario, String clave, int timpoConectado) {
-        super(usuario, clave, timpoConectado);
+    public RedSocial(String nombreRs, String usuario, String clave, int timpoConectado, int like) {
+        super(usuario, clave, timpoConectado, like);
         this.nombreRs = nombreRs;
     }
 
@@ -30,27 +30,25 @@ public class RedSocial extends User {
 
     @Override
     public String toString() {
-        return "RedSocial{" + "nombreRs=" + nombreRs + '}';
+        return "RedSocial{" + "nombreRs=" + nombreRs + '}' + " " + super.toString();
     }
     
-    //listar
-    
-    @Override
-    public void listar() {
-        
+     public void listarRedSocial(){
         System.out.println("Usuario: "+super.getUsuario());
-        System.out.println("Tiempo Conectado: "+ super.getTimpoConectado());
-        System.out.println("Nombre Red Social: "+ this.getNombreRs());
+        System.out.println("Tiempo conectado: "+super.getTimpoConectado());
+        System.out.println("Nombre Red Social: "+this.getNombreRs());
     }
 
-    //likes
-    
     @Override
-    public void acumulaLike() {
-       System.out.println("El usuario: "+ super.getUsuario());
-       System.out.println("Tiene: "+ like + " likes");
-       System.out.println("Tiempo: "+ super.getTimpoConectado());
+    public void vizualizar() {
+        System.out.println("Usuario: "+super.getUsuario());
+        System.out.println("Nombre Red Social: "+this.getNombreRs()); 
     }
 
-    
+    @Override
+    public void likes() {
+        System.out.println("Likes: "+ super.getLike());
+        System.out.println("Tiempo conectado: "+super.getTimpoConectado());
+    }
+
 }

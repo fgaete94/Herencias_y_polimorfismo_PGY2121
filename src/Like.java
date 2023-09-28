@@ -9,5 +9,8 @@
  */
 public interface Like {
     
-    public void acumulaLike();
+    //aqui declaramos las variables finales 
+    //declaramos los metodos abstractos --> sin {}
+    
+    public abstract void likes();
 }

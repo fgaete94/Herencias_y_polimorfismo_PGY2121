@@ -7,7 +7,7 @@
  *
  * @author pipeg
  */
-public class Streaming extends User {
+public class Streaming extends Interes implements Like {
     
     private String genero;
 
@@ -15,10 +15,12 @@ public class Streaming extends User {
         super();
     }
 
-    public Streaming(String genero, String usuario, String clave, int timpoConectado) {
-        super(usuario, clave, timpoConectado);
+    public Streaming(String genero, String usuario, String clave, int timpoConectado, int like) {
+        super(usuario, clave, timpoConectado, like);
         this.genero = genero;
     }
+
+   
 
     public String getGenero() {
         return genero;
@@ -30,27 +32,25 @@ public class Streaming extends User {
 
     @Override
     public String toString() {
-        return "Streaming{" + "genero=" + genero + '}';
+        return "Streaming{" + "genero=" + genero + '}' + " " + super.toString();
     }
     
-    //listar
-    
-    @Override
-    public void listar() {
-        
+     public void listarStreaming(){
         System.out.println("Usuario: "+super.getUsuario());
-        System.out.println("Tiempo Conectado: "+ super.getTimpoConectado());
-        System.out.println("Genero vizualizado: "+ this.getGenero());
+        System.out.println("Tiempo conectado: "+super.getTimpoConectado());
+        System.out.println("Genero Streaming: "+this.getGenero());
     }
-    
-    
-    // LIKES
-    
+
     @Override
-    public void acumulaLike() {
-       System.out.println("El usuario: "+ super.getUsuario());
-       System.out.println("Tiene: "+ like + " likes");
-       System.out.println("Tiempo: "+ super.getTimpoConectado());
+    public void vizualizar() {
+       System.out.println("Usuario: "+super.getUsuario());
+       System.out.println("Genero Streaming: "+this.getGenero());
+    }
+
+    @Override
+    public void likes() {
+        System.out.println("Likes: "+ super.getLike());
+        System.out.println("Tiempo conectado: "+super.getTimpoConectado());
     }
 
 }

@@ -7,7 +7,7 @@
  *
  * @author pipeg
  */
-public class Musica extends User {
+public class Musica extends Interes implements Like{
     
     private String tipoMusica;
 
@@ -15,10 +15,12 @@ public class Musica extends User {
         super();
     }
 
-    public Musica(String tipoMusica, String usuario, String clave, int timpoConectado) {
-        super(usuario, clave, timpoConectado);
+    public Musica(String tipoMusica, String usuario, String clave, int timpoConectado, int like) {
+        super(usuario, clave, timpoConectado, like);
         this.tipoMusica = tipoMusica;
     }
+ 
+   
 
     public String getTipoMusica() {
         return tipoMusica;
@@ -30,26 +32,30 @@ public class Musica extends User {
 
     @Override
     public String toString() {
-        return "Musica{" + "tipoMusica=" + tipoMusica + '}';
+        return "Musica{" + "tipoMusica=" + tipoMusica + '}' + " " + super.toString();
+    }
+     
+    public void listarMusica(){
+        System.out.println("Usuario: "+super.getUsuario());
+        System.out.println("Tiempo conectado: "+super.getTimpoConectado());
+        System.out.println("Tipo Musica: "+this.getTipoMusica());
+    }
+
+    @Override
+    public void vizualizar() {
+        System.out.println("Usuario: "+super.getUsuario());
+        System.out.println("Tipo Musica: "+this.getTipoMusica());
+    }
+
+    @Override
+    public void likes() {
+        System.out.println("Likes: "+ super.getLike());
+        System.out.println("Tiempo conectado: "+super.getTimpoConectado());
     }
     
-    //listar
 
-    @Override
-    public void listar() {
-        
-        System.out.println("Usuario: "+super.getUsuario());
-        System.out.println("Tiempo Conectado: "+ super.getTimpoConectado());
-        System.out.println("Tipo de Musica: "+ this.getTipoMusica());
-        
-    }
-
-    @Override
-    public void acumulaLike() {
-       System.out.println("El usuario: "+ super.getUsuario());
-       System.out.println("Tiene: "+ like + " likes");
-       System.out.println("Tiempo: "+ super.getTimpoConectado());
-    }
+ 
+    
 
     
     
