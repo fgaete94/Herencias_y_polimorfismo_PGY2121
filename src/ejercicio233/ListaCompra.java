@@ -27,7 +27,8 @@ public class ListaCompra {
       public void listarProductos()
     {
         for (Producto producto : lista) {
-            System.out.println(producto.getDescripcion());
+            //System.out.println(producto.getDescripcion());
+            producto.listar();
         }
     }
     
