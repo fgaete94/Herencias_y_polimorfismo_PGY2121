@@ -35,7 +35,7 @@ public class ListaCompra {
       public void calcularTotal(){
           int total=0,precio=0,descuento=0,totalf=0;
           for (Producto producto : lista) {
-              if(producto.getClass().getName().equals(producto.getClass().getName()=="Oferta")){
+              if(producto.getClass().getName().equals(producto.getClass().getName()=="Oferta")){// agregar el nombre del paquete
                   descuento++;
                   precio=producto.getPrecio();
                   total=total+precio;
