@@ -9,14 +9,16 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import modelo.Equipo;
+import modelo.Marca;
 import modelo.Proceso;
+import modelo.TipoEquipo;
 
 
 /**
  *
  * @author pipeg
  */
-public class Registro {
+public class ContProceso {
     
     public boolean agregarProceso (Proceso proceso){
         try {
@@ -45,7 +47,7 @@ public class Registro {
         }
      }
     
-    public Equipo buscarenProceso (int idEquipo){
+    public Equipo buscarenProceso (String idEquipo){
         
         Equipo equip = new Equipo();
         
@@ -56,7 +58,7 @@ public class Registro {
             String query = "SELECT * FROM EQUIPO WHERE id_equipo = ?";
             PreparedStatement stmt = cnx.prepareStatement(query);
             
-            stmt.setString(1, String.valueOf(idEquipo));
+            stmt.setString(1, idEquipo);
             ResultSet rs = stmt.executeQuery();
             
             if (rs.next()){
@@ -80,6 +82,70 @@ public class Registro {
         
         return equip;
         
+    }
+    
+    public TipoEquipo buscartipo(int tipoEquipo){
+        
+        TipoEquipo tipoequipo = new TipoEquipo ();
+        
+        try {
+            Conexion con = new Conexion();
+            Connection cnx = con.obtenerConexionOracle();   
+            
+            String query = "SELECT * FROM TIPO_EQUIPO WHERE id_tipo_equipo = ?";
+            PreparedStatement stmt = cnx.prepareStatement(query);
+            
+            stmt.setString(1, String.valueOf(tipoEquipo));
+            ResultSet rs = stmt.executeQuery();
+            
+            if (rs.next()){
+                tipoequipo.setId_tipo_equipo(rs.getInt("id_tipo_equipo"));
+                tipoequipo.setTipo_equipo(rs.getString("tipo_equipó"));
+                
+            }
+            
+            rs.close();
+            stmt.close();
+            cnx.close();
+            
+                       
+            
+        } catch (Exception e) {
+            System.out.println("Error de SQL al listar por id equipo" + e.getMessage());
+        }
+        return tipoequipo;
+    }
+    
+    
+    public Marca marca (int marc){
+        
+        Marca marca = new Marca ();
+        try {
+            Conexion con = new Conexion();
+            Connection cnx = con.obtenerConexionOracle();   
+            
+            String query = "SELECT * FROM MARCA WHERE id_marca = ?";
+            PreparedStatement stmt = cnx.prepareStatement(query);
+            
+            stmt.setString(1, String.valueOf(marc));
+            ResultSet rs = stmt.executeQuery();
+            
+            if (rs.next()){
+                marca.setId_marca(rs.getInt("id_marca"));
+                marca.setNombre_marca(rs.getString("nombre_marca"));
+                
+            }
+            
+            rs.close();
+            stmt.close();
+            cnx.close();
+            
+                       
+            
+        } catch (Exception e) {
+            System.out.println("Error de SQL al listar por id equipo" + e.getMessage());
+        }        
+        return marca;
     }
     
 }

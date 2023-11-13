@@ -4,6 +4,10 @@
  */
 package vista;
 
+import modelo.Equipo;
+import modelo.Marca;
+import modelo.TipoEquipo;
+
 /**
  *
  * @author pipeg
@@ -15,6 +19,7 @@ public class Proceso extends javax.swing.JFrame {
      */
     public Proceso() {
         initComponents();
+        this.jrbtn_desifectante.setSelected(true);
     }
 
     /**
@@ -26,13 +31,10 @@ public class Proceso extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroupProceso = new javax.swing.ButtonGroup();
         jlbl_ingresarID = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jtxt_id = new javax.swing.JTextArea();
         jbtn_buscar = new javax.swing.JButton();
         jlbl_idUsuario = new javax.swing.JLabel();
-        jtxt_idUsuario = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
         jlbl_nomEquipo = new javax.swing.JLabel();
         jlbl_modeloEquipo = new javax.swing.JLabel();
         jlbl_numSerie = new javax.swing.JLabel();
@@ -47,15 +49,13 @@ public class Proceso extends javax.swing.JFrame {
         jlbl_modelo = new javax.swing.JLabel();
         jlbl_marcaEquipo = new javax.swing.JLabel();
         jlbl_marca = new javax.swing.JLabel();
+        jtxt_id = new javax.swing.JTextField();
+        jtxt_idUsuario = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1024, 768));
+        setPreferredSize(new java.awt.Dimension(784, 770));
 
         jlbl_ingresarID.setText("Ingrese  ID Equipo:");
-
-        jtxt_id.setColumns(20);
-        jtxt_id.setRows(5);
-        jScrollPane1.setViewportView(jtxt_id);
 
         jbtn_buscar.setText("Buscar");
         jbtn_buscar.addActionListener(new java.awt.event.ActionListener() {
@@ -66,18 +66,16 @@ public class Proceso extends javax.swing.JFrame {
 
         jlbl_idUsuario.setText("Ingrese ID Usuario:");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jtxt_idUsuario.setViewportView(jTextArea1);
-
         jlbl_nomEquipo.setText("Nombre Equipo:");
 
         jlbl_modeloEquipo.setText("Modelo Equipo:");
 
         jlbl_numSerie.setText("Numero Serie:");
 
+        buttonGroupProceso.add(jrbtn_desifectante);
         jrbtn_desifectante.setText("Exposición Al Desinfecctante");
 
+        buttonGroupProceso.add(jrbtn_inspSecado);
         jrbtn_inspSecado.setText("Inspección y Secado");
         jrbtn_inspSecado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -85,29 +83,37 @@ public class Proceso extends javax.swing.JFrame {
             }
         });
 
+        buttonGroupProceso.add(jrbtn_empaquetado);
         jrbtn_empaquetado.setText("Empaquetado");
 
+        buttonGroupProceso.add(jrbtn_almacenado);
         jrbtn_almacenado.setText("Almacenado");
 
         jbtn_actualizar.setText("Actualizar Proceso");
 
         jbtn_cancelar.setText("Cancelar");
+        jbtn_cancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtn_cancelarActionPerformed(evt);
+            }
+        });
 
         jlbl_marcaEquipo.setText("Marca Equipo:");
+
+        jtxt_id.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtxt_idActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(100, 100, 100)
-                        .addComponent(jbtn_actualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jbtn_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(106, 128, Short.MAX_VALUE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -131,13 +137,18 @@ public class Proceso extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jlbl_idUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jlbl_ingresarID))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jScrollPane1)
-                                    .addComponent(jtxt_idUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(44, 44, 44)
+                                    .addComponent(jtxt_id)
+                                    .addComponent(jtxt_idUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE))
+                                .addGap(38, 38, 38)
                                 .addComponent(jbtn_buscar)
-                                .addGap(106, 106, 106)))))
+                                .addGap(106, 106, 106))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(97, 97, 97)
+                        .addComponent(jbtn_actualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jbtn_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(98, 98, 98))
             .addGroup(layout.createSequentialGroup()
                 .addGap(139, 139, 139)
@@ -153,16 +164,17 @@ public class Proceso extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jlbl_ingresarID, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbtn_buscar, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(36, 36, 36)
+                .addContainerGap(56, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jlbl_ingresarID, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jtxt_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jbtn_buscar, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlbl_idUsuario)
-                    .addComponent(jtxt_idUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(60, 60, 60)
+                    .addComponent(jtxt_idUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(57, 57, 57)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlbl_nomEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlbl_numSerie, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -187,23 +199,122 @@ public class Proceso extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jrbtn_inspSecado)
                     .addComponent(jrbtn_almacenado))
-                .addGap(91, 91, 91)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jbtn_cancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(83, 83, 83)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbtn_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbtn_actualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(67, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbtn_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_buscarActionPerformed
-        // TODO add your handling code here:
+        this.jtxt_id.requestFocus();
+        
+        controlador.ContProceso proceso = new controlador.ContProceso();
+        Equipo equip = new Equipo();
+        TipoEquipo tipoequip = new TipoEquipo();
+        Marca marc = new Marca();
+        
+        String id,equipo;
+        int estado;
+        
+        
+        // convertir id en String para buscar en sql
+        id= jtxt_id.getText();
+        
+        //con esto buscamos el equipo por el id y recuperamos la info
+        equip=proceso.buscarenProceso(id);
+        this.jlbl_modelo.setText(equip.getModelo());//aqui obtenemos el modelo del equipo
+        
+        // aca recuperamos el tipo según el id de tipo tomado antes
+        tipoequip = proceso.buscartipo(equip.getId_tipo_equipo());
+        this.jlbl_equipo.setText(tipoequip.getTipo_equipo());
+        
+        //aca recuperamos la marca segun el id tomado en el comienzo}
+        marc = proceso.marca(equip.getId_marca());
+        this.jlbl_marca.setText(marc.getNombre_marca());
+        
+        // aca definimos el numero de serie de lo recuperado con la busqueda del equipo por id
+        this.jlbl_serie.setText(equip.getNumero_serie());
+        
+//        indexModelo=equip.getId_tipo_equipo();
+//        switch (indexModelo){
+//            case 1:
+//                tipoEquipo= "ENDOSCOPIO";
+//                break;
+//            case 2:
+//                tipoEquipo= "COLONOSCOPIO";
+//                break;
+//            case 3:
+//                tipoEquipo= "DUODENOSCOPIO";
+//                break;
+//            case 4:
+//                tipoEquipo= "BRONCOSCOPIO";
+//                break;
+//            case 5:
+//                tipoEquipo= "VIDEOBRONCOSCOPIO";
+//                break;
+//            case 6:
+//                tipoEquipo= "VIDEOCOLEDOSCOPIO";
+//                break;
+//            case 7:
+//                tipoEquipo= "TRANSDUCTOR LAPAROSCOPICO";
+//                break;
+//            case 8:
+//                tipoEquipo= "TRANSDUCTOR TRANSESOFAGICO";
+//                break;
+//            case 9:
+//                tipoEquipo= "CISTOSCOPIO";
+//                break;
+//            case 10:
+//                tipoEquipo= "NASOFIBROSCOPIO";
+//                break;
+//            case 11:
+//                tipoEquipo= "NASOLARINGOSCOPIO"; 
+//                break;
+//        }
+//        
+//        this.jlbl_modelo.setText(tipoEquipo);//para mostrar el modelo
+        
+        
+        if (this.jrbtn_desifectante.isSelected()) {
+            estado = 2;
+        } else {
+            if (this.jrbtn_inspSecado.isSelected()) {
+                estado = 3;
+            } else {
+                if (this.jrbtn_empaquetado.isSelected()) {
+                    estado = 4;
+                } else {
+                    if (this.jrbtn_almacenado.isSelected()) {
+                        estado = 5;
+                    }
+                }
+            }
+        }
+
+        
+       
+
+
+        
+        
+        
     }//GEN-LAST:event_jbtn_buscarActionPerformed
 
     private void jrbtn_inspSecadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbtn_inspSecadoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jrbtn_inspSecadoActionPerformed
+
+    private void jbtn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_cancelarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jbtn_cancelarActionPerformed
+
+    private void jtxt_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxt_idActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtxt_idActionPerformed
 
     /**
      * @param args the command line arguments
@@ -241,8 +352,7 @@ public class Proceso extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.ButtonGroup buttonGroupProceso;
     private javax.swing.JButton jbtn_actualizar;
     private javax.swing.JButton jbtn_buscar;
     private javax.swing.JButton jbtn_cancelar;
@@ -260,7 +370,7 @@ public class Proceso extends javax.swing.JFrame {
     private javax.swing.JRadioButton jrbtn_desifectante;
     private javax.swing.JRadioButton jrbtn_empaquetado;
     private javax.swing.JRadioButton jrbtn_inspSecado;
-    private javax.swing.JTextArea jtxt_id;
-    private javax.swing.JScrollPane jtxt_idUsuario;
+    private javax.swing.JTextField jtxt_id;
+    private javax.swing.JTextField jtxt_idUsuario;
     // End of variables declaration//GEN-END:variables
 }
