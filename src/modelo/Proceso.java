@@ -13,18 +13,16 @@ import java.util.Date;
 public class Proceso {
     
     private int id_proceso, id_usuario,id_tipo_proceso,id_equipo;
-    private String nombre_usuario;
     private Date fecha;
 
     public Proceso() {
     }
 
-    public Proceso(int id_proceso, int id_usuario, int id_tipo_proceso, int id_equipo, String nombre_usuario, Date fecha) {
+    public Proceso(int id_proceso, int id_usuario, int id_tipo_proceso, int id_equipo, Date fecha) {
         this.id_proceso = id_proceso;
         this.id_usuario = id_usuario;
         this.id_tipo_proceso = id_tipo_proceso;
         this.id_equipo = id_equipo;
-        this.nombre_usuario = nombre_usuario;
         this.fecha = fecha;
     }
 
@@ -60,14 +58,6 @@ public class Proceso {
         this.id_equipo = id_equipo;
     }
 
-    public String getNombre_usuario() {
-        return nombre_usuario;
-    }
-
-    public void setNombre_usuario(String nombre_usuario) {
-        this.nombre_usuario = nombre_usuario;
-    }
-
     public Date getFecha() {
         return fecha;
     }
@@ -78,8 +68,7 @@ public class Proceso {
 
     @Override
     public String toString() {
-        return "Proceso{" + "id_proceso=" + id_proceso + ", id_usuario=" + id_usuario + ", id_tipo_proceso=" + id_tipo_proceso + ", id_equipo=" + id_equipo + ", nombre_usuario=" + nombre_usuario + ", fecha=" + fecha + '}';
+        return "Proceso{" + "id_proceso=" + id_proceso + ", id_usuario=" + id_usuario + ", id_tipo_proceso=" + id_tipo_proceso + ", id_equipo=" + id_equipo + ", fecha=" + fecha + '}';
     }
 
-    
 }
