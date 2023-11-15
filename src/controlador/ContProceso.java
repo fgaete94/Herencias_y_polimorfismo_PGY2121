@@ -26,13 +26,13 @@ public class ContProceso {
             Conexion con = new Conexion();
             Connection cnx = con.obtenerConexionOracle();
             
-            String query = "INSERT INTO PROCESO  VALUES (?,?,?,?,?)";
+            String query = "INSERT INTO PROCESO  VALUES (PROCESO_IDPROCESO_SEC.nextval,?,SYSDATE,?,?)";
             PreparedStatement stmt = cnx.prepareStatement(query);
-            stmt.setString(1, "PROCESO_IDPROCESO_SEC.nextval");
-            stmt.setString(2, String.valueOf(proceso.getId_usuario()));
-            stmt.setString(3, "SYSDATE");
-            stmt.setString(4, String.valueOf(proceso.getId_tipo_proceso()));
-            stmt.setString(5, String.valueOf(proceso.getId_equipo()));
+            //stmt.setString(1, "PROCESO_IDPROCESO_SEC.nextval");
+            stmt.setString(1, String.valueOf(proceso.getId_usuario()));
+            //stmt.setString(3, "SYSDATE");
+            stmt.setString(2, String.valueOf(proceso.getId_tipo_proceso()));
+            stmt.setString(3, String.valueOf(proceso.getId_equipo()));
             
             stmt.executeUpdate();
             stmt.close();

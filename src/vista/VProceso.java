@@ -4,20 +4,22 @@
  */
 package vista;
 
+import javax.swing.JOptionPane;
 import modelo.Equipo;
 import modelo.Marca;
+import modelo.Proceso;
 import modelo.TipoEquipo;
 
 /**
  *
  * @author pipeg
  */
-public class Proceso extends javax.swing.JFrame {
+public class VProceso extends javax.swing.JFrame {
 
     /**
      * Creates new form Proceso
      */
-    public Proceso() {
+    public VProceso() {
         initComponents();
         this.jrbtn_desifectante.setSelected(true);
     }
@@ -53,6 +55,7 @@ public class Proceso extends javax.swing.JFrame {
         jtxt_idUsuario = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Actualizar Proceso");
         setPreferredSize(new java.awt.Dimension(784, 770));
 
         jlbl_ingresarID.setText("Ingrese  ID Equipo:");
@@ -90,6 +93,11 @@ public class Proceso extends javax.swing.JFrame {
         jrbtn_almacenado.setText("Almacenado");
 
         jbtn_actualizar.setText("Actualizar Proceso");
+        jbtn_actualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtn_actualizarActionPerformed(evt);
+            }
+        });
 
         jbtn_cancelar.setText("Cancelar");
         jbtn_cancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -164,7 +172,7 @@ public class Proceso extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(56, Short.MAX_VALUE)
+                .addContainerGap(132, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jlbl_ingresarID, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -203,10 +211,11 @@ public class Proceso extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbtn_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbtn_actualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addContainerGap(143, Short.MAX_VALUE))
         );
 
-        pack();
+        setSize(new java.awt.Dimension(800, 700));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbtn_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_buscarActionPerformed
@@ -220,25 +229,35 @@ public class Proceso extends javax.swing.JFrame {
         String id,equipo;
         int estado;
         
-        
-        // convertir id en String para buscar en sql
-        id= jtxt_id.getText();
-        
-        //con esto buscamos el equipo por el id y recuperamos la info
-        equip=proceso.buscarenProceso(id);
-        this.jlbl_modelo.setText(equip.getModelo());//aqui obtenemos el modelo del equipo
-        
-        // aca recuperamos el tipo según el id de tipo tomado antes
-        tipoequip = proceso.buscartipo(equip.getId_tipo_equipo());
-        this.jlbl_equipo.setText(tipoequip.getTipo_equipo());
-        
-        //aca recuperamos la marca segun el id tomado en el comienzo}
-        marc = proceso.marca(equip.getId_marca());
-        this.jlbl_marca.setText(marc.getNombre_marca());
-        
-        // aca definimos el numero de serie de lo recuperado con la busqueda del equipo por id
-        this.jlbl_serie.setText(equip.getNumero_serie());
-        
+        try {
+            
+            if (jtxt_id.getText().isEmpty()){
+                JOptionPane.showMessageDialog(rootPane, "Debe ingresar un ID!", "Atención",JOptionPane.WARNING_MESSAGE);
+            }else{
+                // convertir id en String para buscar en sql
+                id = jtxt_id.getText();
+
+                //con esto buscamos el equipo por el id y recuperamos la info
+                equip = proceso.buscarenProceso(id);
+                this.jlbl_modelo.setText(equip.getModelo());//aqui obtenemos el modelo del equipo
+
+                // aca recuperamos el tipo según el id de tipo tomado antes
+                tipoequip = proceso.buscartipo(equip.getId_tipo_equipo());
+                this.jlbl_equipo.setText(tipoequip.getTipo_equipo());
+
+                //aca recuperamos la marca segun el id tomado en el comienzo}
+                marc = proceso.marca(equip.getId_marca());
+                this.jlbl_marca.setText(marc.getNombre_marca());
+
+                // aca definimos el numero de serie de lo recuperado con la busqueda del equipo por id
+                this.jlbl_serie.setText(equip.getNumero_serie());
+
+
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, "Equipo no encontrado!", "Atención",JOptionPane.WARNING_MESSAGE);
+        }
 //        indexModelo=equip.getId_tipo_equipo();
 //        switch (indexModelo){
 //            case 1:
@@ -277,7 +296,30 @@ public class Proceso extends javax.swing.JFrame {
 //        }
 //        
 //        this.jlbl_modelo.setText(tipoEquipo);//para mostrar el modelo
+
         
+    }//GEN-LAST:event_jbtn_buscarActionPerformed
+
+    private void jrbtn_inspSecadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbtn_inspSecadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jrbtn_inspSecadoActionPerformed
+
+    private void jbtn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_cancelarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jbtn_cancelarActionPerformed
+
+    private void jtxt_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxt_idActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtxt_idActionPerformed
+
+    private void jbtn_actualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_actualizarActionPerformed
+         Proceso proces = new Proceso();
+        controlador.ContProceso agrega = new controlador.ContProceso();
+        
+        int id= Integer.parseInt(this.jtxt_id.getText()) ;
+        int idUser = Integer.parseInt(this.jtxt_idUsuario.getText());
+        
+        int estado = 0;
         
         if (this.jrbtn_desifectante.isSelected()) {
             estado = 2;
@@ -294,27 +336,21 @@ public class Proceso extends javax.swing.JFrame {
                 }
             }
         }
-
         
+        proces.setId_equipo(id);
+        proces.setId_usuario(idUser);
+        proces.setId_tipo_proceso(estado);
+        
+        
+        try {
+             agrega.agregarProceso(proces);
+             JOptionPane.showMessageDialog(rootPane, "Proceso Actualizado", "",JOptionPane.INFORMATION_MESSAGE);
+             this.dispose();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, "Proceso NO Actualizado", "ERROR",JOptionPane.ERROR_MESSAGE);
+        }
        
-
-
-        
-        
-        
-    }//GEN-LAST:event_jbtn_buscarActionPerformed
-
-    private void jrbtn_inspSecadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbtn_inspSecadoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jrbtn_inspSecadoActionPerformed
-
-    private void jbtn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_cancelarActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_jbtn_cancelarActionPerformed
-
-    private void jtxt_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxt_idActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtxt_idActionPerformed
+    }//GEN-LAST:event_jbtn_actualizarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -333,20 +369,21 @@ public class Proceso extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Proceso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VProceso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Proceso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VProceso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Proceso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VProceso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Proceso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VProceso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Proceso().setVisible(true);
+                new VProceso().setVisible(true);
             }
         });
     }
