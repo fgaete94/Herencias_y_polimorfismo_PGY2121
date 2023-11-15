@@ -251,6 +251,10 @@ public class VProceso extends javax.swing.JFrame {
 
                 // aca definimos el numero de serie de lo recuperado con la busqueda del equipo por id
                 this.jlbl_serie.setText(equip.getNumero_serie());
+                
+                if (this.jlbl_modelo.getText().isEmpty() && this.jlbl_equipo.getText().isEmpty() && this.jlbl_marca.getText().isEmpty() && this.jlbl_serie.getText().isEmpty()){
+                    JOptionPane.showMessageDialog(rootPane, "Equipo no encontrado!", "Atención",JOptionPane.WARNING_MESSAGE);
+                }
 
 
             }
@@ -316,39 +320,52 @@ public class VProceso extends javax.swing.JFrame {
          Proceso proces = new Proceso();
         controlador.ContProceso agrega = new controlador.ContProceso();
         
-        int id= Integer.parseInt(this.jtxt_id.getText()) ;
-        int idUser = Integer.parseInt(this.jtxt_idUsuario.getText());
-        
-        int estado = 0;
-        
-        if (this.jrbtn_desifectante.isSelected()) {
-            estado = 2;
-        } else {
-            if (this.jrbtn_inspSecado.isSelected()) {
-                estado = 3;
-            } else {
-                if (this.jrbtn_empaquetado.isSelected()) {
-                    estado = 4;
-                } else {
-                    if (this.jrbtn_almacenado.isSelected()) {
-                        estado = 5;
+        if (this.jtxt_id.getText().isEmpty()){
+            JOptionPane.showMessageDialog(rootPane, "Debe ingresar un ID!", "Atención",JOptionPane.WARNING_MESSAGE);
+        }else {
+            if(this.jtxt_idUsuario.getText().isEmpty()){
+               JOptionPane.showMessageDialog(rootPane, "Debe ingresar un ID de usuario!", "Atención",JOptionPane.WARNING_MESSAGE); 
+            }else{
+                if (this.jlbl_modelo.getText().isEmpty() && this.jlbl_equipo.getText().isEmpty() && this.jlbl_marca.getText().isEmpty() && this.jlbl_serie.getText().isEmpty()){
+                   JOptionPane.showMessageDialog(rootPane, "Debe corroborar los datos del ID", "Atención",JOptionPane.WARNING_MESSAGE); 
+                }else{
+                    int id = Integer.parseInt(this.jtxt_id.getText());
+                    int idUser = Integer.parseInt(this.jtxt_idUsuario.getText());
+
+                    int estado = 0;
+
+                    if (this.jrbtn_desifectante.isSelected()) {
+                        estado = 2;
+                    } else {
+                        if (this.jrbtn_inspSecado.isSelected()) {
+                            estado = 3;
+                        } else {
+                            if (this.jrbtn_empaquetado.isSelected()) {
+                                estado = 4;
+                            } else {
+                                if (this.jrbtn_almacenado.isSelected()) {
+                                    estado = 5;
+                                }
+                            }
+                        }
+                    }
+
+                    proces.setId_equipo(id);
+                    proces.setId_usuario(idUser);
+                    proces.setId_tipo_proceso(estado);
+
+                    try {
+                        agrega.agregarProceso(proces);
+                        JOptionPane.showMessageDialog(rootPane, "Proceso Actualizado", "", JOptionPane.INFORMATION_MESSAGE);
+                        this.dispose();
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(rootPane, "Proceso NO Actualizado", "ERROR", JOptionPane.ERROR_MESSAGE);
                     }
                 }
+                
             }
         }
         
-        proces.setId_equipo(id);
-        proces.setId_usuario(idUser);
-        proces.setId_tipo_proceso(estado);
-        
-        
-        try {
-             agrega.agregarProceso(proces);
-             JOptionPane.showMessageDialog(rootPane, "Proceso Actualizado", "",JOptionPane.INFORMATION_MESSAGE);
-             this.dispose();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(rootPane, "Proceso NO Actualizado", "ERROR",JOptionPane.ERROR_MESSAGE);
-        }
        
     }//GEN-LAST:event_jbtn_actualizarActionPerformed
 
