@@ -10,34 +10,18 @@ package modelo;
  */
 public class Equipo {
 
-private int id_libro,numero_serie,id_marca,id_tipo_equipo;
-private  String modelo;
+private int id_equipo,id_marca,id_tipo_equipo;
+private  String numero_serie,modelo;
 
     public Equipo() {
     }
 
-    public Equipo(int id_libro, int numero_serie, int id_marca, int id_tipo_equipo, String modelo) {
-        this.id_libro = id_libro;
-        this.numero_serie = numero_serie;
-        this.id_marca = id_marca;
-        this.id_tipo_equipo = id_tipo_equipo;
-        this.modelo = modelo;
+    public int getId_equipo() {
+        return id_equipo;
     }
 
-    public int getId_libro() {
-        return id_libro;
-    }
-
-    public void setId_libro(int id_libro) {
-        this.id_libro = id_libro;
-    }
-
-    public int getNumero_serie() {
-        return numero_serie;
-    }
-
-    public void setNumero_serie(int numero_serie) {
-        this.numero_serie = numero_serie;
+    public void setId_equipo(int id_equipo) {
+        this.id_equipo = id_equipo;
     }
 
     public int getId_marca() {
@@ -56,6 +40,14 @@ private  String modelo;
         this.id_tipo_equipo = id_tipo_equipo;
     }
 
+    public String getNumero_serie() {
+        return numero_serie;
+    }
+
+    public void setNumero_serie(String numero_serie) {
+        this.numero_serie = numero_serie;
+    }
+
     public String getModelo() {
         return modelo;
     }
@@ -64,11 +56,19 @@ private  String modelo;
         this.modelo = modelo;
     }
 
-    @Override
-    public String toString() {
-        return "Equipo{" + "id_libro=" + id_libro + ", numero_serie=" + numero_serie + ", id_marca=" + id_marca + ", id_tipo_equipo=" + id_tipo_equipo + ", modelo=" + modelo + '}';
+    public Equipo(int id_equipo, int id_marca, int id_tipo_equipo, String numero_serie, String modelo) {
+        this.id_equipo = id_equipo;
+        this.id_marca = id_marca;
+        this.id_tipo_equipo = id_tipo_equipo;
+        this.numero_serie = numero_serie;
+        this.modelo = modelo;
     }
 
-
+    @Override
+    public String toString() {
+        return "Equipo{" + "id_equipo=" + id_equipo + ", id_marca=" + id_marca + ", id_tipo_equipo=" + id_tipo_equipo + ", numero_serie=" + numero_serie + ", modelo=" + modelo + '}';
+    }
     
+    
+
 }
