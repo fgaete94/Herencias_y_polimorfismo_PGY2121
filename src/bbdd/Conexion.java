@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package bbdd;
 
 import java.nio.file.Paths; // IMPORTACION DE ORACLE
@@ -16,9 +12,9 @@ import java.util.Properties; // IMPORTACION DE ORACLE
 public class Conexion {
     
     // DE ACA COMIENZA LA CONEXION A ORACLE
-    private static final String WALLET_PATH = "C:\\Users\\pipeg\\OneDrive\\Escritorio\\proyecto software\\wallet";
+private static final String WALLET_PATH = "C:\\Users\\Ariel Mathias\\Desktop\\NetBeansProyect\\Wallet";
     private static final String WALLET_PASSWORD = "ClaseMDY3131-";
-    private static final String JDBC_URL = "jdbc:oracle:thin:@bbddendoscopios_high"; // - REEMPLAZA 'testdb_high' EN EL ARCHIVO TNSNAMES.ORA APARECE AL INICIO [NOMBRE DE LA DB]_HIGH";
+    private static final String JDBC_URL = "jdbc:oracle:thin:@wbtqioyafg8c13yv_high"; // - REEMPLAZA 'testdb_high' EN EL ARCHIVO TNSNAMES.ORA APARECE AL INICIO [NOMBRE DE LA DB]_HIGH";
 
     public Connection obtenerConexionOracle() throws Exception {
         // Configuración del wallet
@@ -32,7 +28,7 @@ public class Conexion {
         System.setProperty("javax.net.ssl.keyStorePassword", WALLET_PASSWORD);
 
         Properties properties = new Properties();
-        properties.put("user", "ENDOSCOPIOS");
+        properties.put("user", "PRUEBAENDO");
         properties.put("password", WALLET_PASSWORD);
 
         return DriverManager.getConnection(JDBC_URL, properties);
