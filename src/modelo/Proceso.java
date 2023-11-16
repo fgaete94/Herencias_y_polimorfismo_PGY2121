@@ -71,4 +71,3 @@ public class Proceso {
         return "Proceso{" + "id_proceso=" + id_proceso + ", id_usuario=" + id_usuario + ", id_tipo_proceso=" + id_tipo_proceso + ", id_equipo=" + id_equipo + ", fecha=" + fecha + '}';
     }
 
-}
