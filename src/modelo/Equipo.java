@@ -11,18 +11,24 @@ package modelo;
 public class Equipo {
 
 private int id_equipo,id_marca,id_tipo_equipo;
-private  String numero_serie,modelo;
+
+private  String modelo, numero_serie;
+
 
     public Equipo() {
     }
-
-    public int getId_equipo() {
-        return id_equipo;
-    }
-
-    public void setId_equipo(int id_equipo) {
+  
+    public Equipo(int id_equipo, int id_marca, int id_tipo_equipo, String numero_serie, String modelo) {
         this.id_equipo = id_equipo;
+        this.id_marca = id_marca;
+        this.id_tipo_equipo = id_tipo_equipo;
+        this.numero_serie = numero_serie;
+        this.modelo = modelo;
     }
+
+
+    }
+
 
     public int getId_marca() {
         return id_marca;
@@ -56,17 +62,13 @@ private  String numero_serie,modelo;
         this.modelo = modelo;
     }
 
-    public Equipo(int id_equipo, int id_marca, int id_tipo_equipo, String numero_serie, String modelo) {
-        this.id_equipo = id_equipo;
-        this.id_marca = id_marca;
-        this.id_tipo_equipo = id_tipo_equipo;
-        this.numero_serie = numero_serie;
-        this.modelo = modelo;
-    }
+
 
     @Override
     public String toString() {
-        return "Equipo{" + "id_equipo=" + id_equipo + ", id_marca=" + id_marca + ", id_tipo_equipo=" + id_tipo_equipo + ", numero_serie=" + numero_serie + ", modelo=" + modelo + '}';
+
+        return "Equipo{" + "id_equipo=" + id_equipo + ", numero_serie=" + numero_serie + ", id_marca=" + id_marca + ", id_tipo_equipo=" + id_tipo_equipo + ", modelo=" + modelo + '}';
+
     }
     
     
