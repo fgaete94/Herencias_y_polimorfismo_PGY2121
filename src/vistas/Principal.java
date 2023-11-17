@@ -40,6 +40,10 @@ public class Principal extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jPanel_Parent = new javax.swing.JPanel();
         jPanel_child_IngresarEquipo = new javax.swing.JPanel();
+        jbtn_actualizar = new javax.swing.JButton();
+        jbtn_buscar = new javax.swing.JButton();
+        jbtn_ingresar = new javax.swing.JButton();
+        jbtn_salir = new javax.swing.JButton();
         jPanel_child_ActualizarEquipo = new javax.swing.JPanel();
         jMenuBar2 = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
@@ -162,15 +166,62 @@ public class Principal extends javax.swing.JFrame {
         jPanel_Parent.setBackground(new java.awt.Color(204, 255, 255));
         jPanel_Parent.setLayout(new java.awt.CardLayout());
 
+        jbtn_actualizar.setText("Actualizar");
+        jbtn_actualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtn_actualizarActionPerformed(evt);
+            }
+        });
+
+        jbtn_buscar.setText("buscar");
+        jbtn_buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtn_buscarActionPerformed(evt);
+            }
+        });
+
+        jbtn_ingresar.setText("Ingresar");
+        jbtn_ingresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtn_ingresarActionPerformed(evt);
+            }
+        });
+
+        jbtn_salir.setText("Salir");
+        jbtn_salir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtn_salirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel_child_IngresarEquipoLayout = new javax.swing.GroupLayout(jPanel_child_IngresarEquipo);
         jPanel_child_IngresarEquipo.setLayout(jPanel_child_IngresarEquipoLayout);
         jPanel_child_IngresarEquipoLayout.setHorizontalGroup(
             jPanel_child_IngresarEquipoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 401, Short.MAX_VALUE)
+            .addGroup(jPanel_child_IngresarEquipoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel_child_IngresarEquipoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jbtn_actualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbtn_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbtn_ingresar, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(254, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_child_IngresarEquipoLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jbtn_salir)
+                .addGap(23, 23, 23))
         );
         jPanel_child_IngresarEquipoLayout.setVerticalGroup(
             jPanel_child_IngresarEquipoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 469, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_child_IngresarEquipoLayout.createSequentialGroup()
+                .addContainerGap(112, Short.MAX_VALUE)
+                .addComponent(jbtn_ingresar, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50)
+                .addComponent(jbtn_actualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50)
+                .addComponent(jbtn_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42)
+                .addComponent(jbtn_salir)
+                .addGap(23, 23, 23))
         );
 
         jPanel_Parent.add(jPanel_child_IngresarEquipo, "card2");
@@ -233,6 +284,35 @@ public class Principal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jbtn_ingresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_ingresarActionPerformed
+        JFrame_IngresarEquipo abrir = new JFrame_IngresarEquipo();
+        
+        abrir.setVisible(true);
+    }//GEN-LAST:event_jbtn_ingresarActionPerformed
+
+    private void jbtn_actualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_actualizarActionPerformed
+        // TODO add your handling code here:
+        
+        VProceso abrir = new VProceso();
+        
+        abrir.setVisible(true);
+        
+    }//GEN-LAST:event_jbtn_actualizarActionPerformed
+
+    private void jbtn_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_buscarActionPerformed
+        // TODO add your handling code here:
+        
+        BuscarEquipo abrir = new BuscarEquipo();
+        
+        abrir.setVisible(true);
+        
+    }//GEN-LAST:event_jbtn_buscarActionPerformed
+
+    private void jbtn_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_salirActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_jbtn_salirActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -293,5 +373,9 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel_child_IngresarEquipo;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
+    private javax.swing.JButton jbtn_actualizar;
+    private javax.swing.JButton jbtn_buscar;
+    private javax.swing.JButton jbtn_ingresar;
+    private javax.swing.JButton jbtn_salir;
     // End of variables declaration//GEN-END:variables
 }

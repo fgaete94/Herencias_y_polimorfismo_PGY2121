@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package vista;
+package vistas;
 
 import javax.swing.JOptionPane;
 import modelo.Equipo;
@@ -56,7 +56,6 @@ public class VProceso extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Actualizar Proceso");
-        setPreferredSize(new java.awt.Dimension(784, 770));
 
         jlbl_ingresarID.setText("Ingrese  ID Equipo:");
 
@@ -400,7 +399,7 @@ public class VProceso extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VProceso().setVisible(true);
+                new Principal().setVisible(true);
             }
         });
     }

@@ -17,18 +17,22 @@ private  String modelo, numero_serie;
 
     public Equipo() {
     }
-  
-    public Equipo(int id_equipo, int id_marca, int id_tipo_equipo, String numero_serie, String modelo) {
+
+    public Equipo(int id_equipo, int id_marca, int id_tipo_equipo, String modelo, String numero_serie) {
         this.id_equipo = id_equipo;
         this.id_marca = id_marca;
         this.id_tipo_equipo = id_tipo_equipo;
-        this.numero_serie = numero_serie;
         this.modelo = modelo;
+        this.numero_serie = numero_serie;
     }
 
-
+    public int getId_equipo() {
+        return id_equipo;
     }
 
+    public void setId_equipo(int id_equipo) {
+        this.id_equipo = id_equipo;
+    }
 
     public int getId_marca() {
         return id_marca;
@@ -46,14 +50,6 @@ private  String modelo, numero_serie;
         this.id_tipo_equipo = id_tipo_equipo;
     }
 
-    public String getNumero_serie() {
-        return numero_serie;
-    }
-
-    public void setNumero_serie(String numero_serie) {
-        this.numero_serie = numero_serie;
-    }
-
     public String getModelo() {
         return modelo;
     }
@@ -62,15 +58,19 @@ private  String modelo, numero_serie;
         this.modelo = modelo;
     }
 
+    public String getNumero_serie() {
+        return numero_serie;
+    }
 
+    public void setNumero_serie(String numero_serie) {
+        this.numero_serie = numero_serie;
+    }
 
     @Override
     public String toString() {
-
-        return "Equipo{" + "id_equipo=" + id_equipo + ", numero_serie=" + numero_serie + ", id_marca=" + id_marca + ", id_tipo_equipo=" + id_tipo_equipo + ", modelo=" + modelo + '}';
-
+        return "Equipo{" + "id_equipo=" + id_equipo + ", id_marca=" + id_marca + ", id_tipo_equipo=" + id_tipo_equipo + ", modelo=" + modelo + ", numero_serie=" + numero_serie + '}';
     }
-    
-    
+  
+   
 
 }
