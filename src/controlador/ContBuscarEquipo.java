@@ -20,7 +20,7 @@ import modelo.TipoProceso;
 // Buscar estado de Equipo ingresado
 public class ContBuscarEquipo {
 
-    public ArrayList<Proceso> buscarEquipo(String idEquipo) {
+    public ArrayList<Proceso> buscarEquipoLista(String idEquipo) {
 
         Proceso proceso = new Proceso();
         ArrayList<Proceso> listaProceso = new ArrayList<>();
