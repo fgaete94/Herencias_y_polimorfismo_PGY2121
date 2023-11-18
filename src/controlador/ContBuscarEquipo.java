@@ -11,6 +11,7 @@ import modelo.Marca;
 import modelo.Proceso;
 import modelo.TipoEquipo;
 import modelo.TipoProceso;
+import modelo.Usuario;
 
 /*
  *
@@ -20,35 +21,69 @@ import modelo.TipoProceso;
 // Buscar estado de Equipo ingresado
 public class ContBuscarEquipo {
 
-    public ArrayList<Proceso> buscarEquipoLista(String idEquipo) {
+    public ArrayList<Proceso> buscarEquipoLista() {
 
-        Proceso proceso = new Proceso();
+        //Proceso proceso = new Proceso();
         ArrayList<Proceso> listaProceso = new ArrayList<>();
-        for (Proceso proceso1 : listaProceso) {
 
-            try {
-                // Aquí creamos el objeto conexion de la Clase Conexion
-                Conexion conexion = new Conexion();
-                Connection cnt = conexion.obtenerConexionOracle();
-                String query = "SELECT *FROM PROCESO WHERE id_equipo = ?";
-                PreparedStatement pstmt = cnt.prepareStatement(query);
+        try {
+            // Aquí creamos el objeto conexion de la Clase Conexion
+            Conexion conexion = new Conexion();
+            Connection cnt = conexion.obtenerConexionOracle();
+            String query = "SELECT * FROM PROCESO";
+            PreparedStatement pstmt = cnt.prepareStatement(query);
 
-                pstmt.setString(1, idEquipo);
-                ResultSet rst = pstmt.executeQuery();
+            ResultSet rst = pstmt.executeQuery();
 
-                if (rst.next()) {
-                    proceso.setId_equipo(rst.getInt("id_equipo"));
-                    proceso.setId_proceso(rst.getInt("id_proceso"));
-                    proceso.setId_tipo_proceso(rst.getInt("id_tipo_proceso"));
-                    proceso.setId_usuario(rst.getInt("id_usuario"));
-                }
-
-            } catch (Exception e) {
-                System.out.println("Error de SQL al insertar equipo" + e.getMessage());
+            while (rst.next()) {
+                Proceso proceso = new Proceso();
+                proceso.setId_equipo(rst.getInt("id_equipo"));
+                proceso.setId_proceso(rst.getInt("id_proceso"));
+                proceso.setId_tipo_proceso(rst.getInt("id_tipo_proceso"));
+                proceso.setId_usuario(rst.getInt("id_usuario"));
+                listaProceso.add(proceso);
             }
 
+//                if (rst.next()) {
+//                    proceso1.setId_equipo(rst.getInt("id_equipo"));
+//                    proceso1.setId_proceso(rst.getInt("id_proceso"));
+//                    proceso1.setId_tipo_proceso(rst.getInt("id_tipo_proceso"));
+//                    proceso1.setId_usuario(rst.getInt("id_usuario"));
+//                }
+        } catch (Exception e) {
+            System.out.println("Error de SQL al insertar equipo" + e.getMessage());
         }
+
         return listaProceso;
+    }
+    
+    public Proceso buscarEquipo (String idEquip){
+        Proceso proceso = new Proceso();
+  
+        try {
+            // Aquí creamos el objeto conexion de la Clase Conexion
+            Conexion conexion = new Conexion();
+            Connection cnt = conexion.obtenerConexionOracle();
+            String query = "SELECT * FROM PROCESO WHERE id_equipo = ? ORDER BY 4 DESC";
+            PreparedStatement pstmt = cnt.prepareStatement(query);
+
+            pstmt.setString(1, String.valueOf(idEquip));
+            ResultSet rst = pstmt.executeQuery();
+
+            if (rst.next()) {
+                proceso.setId_proceso(rst.getInt("id_proceso"));
+                proceso.setId_usuario(rst.getInt("id_usuario"));
+                proceso.setFecha(rst.getDate("fecha"));
+                proceso.setId_tipo_proceso(rst.getInt("id_tipo_proceso"));
+                proceso.setId_equipo(rst.getInt("id_equipo"));
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error de SQL al consultar proceso" + e.getMessage());
+        }
+        return proceso;    
+        
+        
     }
 //    public ArrayList<Proceso> buscarEquipo(String idEquipo) {
 //        ArrayList<Proceso> listaProceso = new ArrayList<>();
@@ -112,7 +147,7 @@ public class ContBuscarEquipo {
     }
 
     // Buscar el modelo del Equipo
-    public Equipo buscarEquipo(int modelo) {
+    public Equipo buscarEquipo(int idEquipo) {
 
         Equipo equipo = new Equipo();
 
@@ -122,7 +157,7 @@ public class ContBuscarEquipo {
             String query = "SELECT * FROM EQUIPO WHERE id_equipo = ?";
             PreparedStatement pstmt = cnt.prepareStatement(query);
 
-            pstmt.setString(1, String.valueOf(modelo));
+            pstmt.setString(1, String.valueOf(idEquipo));
             ResultSet rst = pstmt.executeQuery();
             if (rst.next()) {
                 equipo.setId_equipo(rst.getInt("id_equipo"));
@@ -186,8 +221,61 @@ public class ContBuscarEquipo {
             }
 
         } catch (Exception e) {
-            System.out.println("Error de SQL al insertar equipo" + e.getMessage());
+            System.out.println("Error de SQL al buscar tipo equipo" + e.getMessage());
         }
         return tipoEqui;
+    }
+    
+    public Usuario buscarUsuario (int idUsuario){
+
+        Usuario user = new Usuario();
+
+        try {
+
+            Conexion conexion = new Conexion();
+            Connection cnt = conexion.obtenerConexionOracle();
+            String query = "SELECT * FROM USUARIO WHERE id_usuario = ?";
+            PreparedStatement pstmt = cnt.prepareStatement(query);
+
+            pstmt.setString(1, String.valueOf(idUsuario));
+            ResultSet rst = pstmt.executeQuery();
+
+            if (rst.next()) {
+                user.setId_usuario(rst.getInt("id_usuario"));
+                user.setNombre_usuario(rst.getString("nombre_usuario"));
+                user.setId_estamento(rst.getInt("id_estamento"));
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error de SQL al buscar usuario" + e.getMessage());
+        }
+        return user; 
+    }
+    
+    public Proceso buscarproceso (int idproceso){
+           Proceso proce = new Proceso();
+
+        try {
+
+            Conexion conexion = new Conexion();
+            Connection cnt = conexion.obtenerConexionOracle();
+            String query = "SELECT * FROM PROCESO WHERE id_proceso = ?";
+            PreparedStatement pstmt = cnt.prepareStatement(query);
+
+            pstmt.setString(1, String.valueOf(idproceso));
+            ResultSet rst = pstmt.executeQuery();
+
+            if (rst.next()) {
+                proce.setId_proceso(rst.getInt("id_proceso"));
+                proce.setId_usuario(rst.getInt("id_usuario"));
+                proce.setFecha(rst.getDate("fecha"));
+                proce.setId_tipo_proceso(rst.getInt("id_tipo_proceso"));
+                proce.setId_equipo(rst.getInt("id_equipo"));
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error de SQL al buscar usuario" + e.getMessage());
+        }
+        return proce; 
     }
 }

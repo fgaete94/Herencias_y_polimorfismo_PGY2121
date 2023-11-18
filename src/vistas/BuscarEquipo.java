@@ -2,11 +2,13 @@ package vistas;
 
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import modelo.Equipo;
 import modelo.Marca;
 import modelo.Proceso;
 import modelo.TipoEquipo;
 import modelo.TipoProceso;
+import modelo.Usuario;
 
 /**
  *
@@ -19,6 +21,7 @@ public class BuscarEquipo extends javax.swing.JFrame {
      */
     public BuscarEquipo() {
         initComponents();
+        DefaultTableModel modelo = (DefaultTableModel) Jtab_buscarProceso.getModel();
     }
 
     /**
@@ -47,8 +50,8 @@ public class BuscarEquipo extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jbtn_mostrarEquipos = new javax.swing.JButton();
         jbtn_volver = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jtxtA_listaEquipos = new javax.swing.JTextArea();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        Jtab_buscarProceso = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -93,9 +96,23 @@ public class BuscarEquipo extends javax.swing.JFrame {
             }
         });
 
-        jtxtA_listaEquipos.setColumns(20);
-        jtxtA_listaEquipos.setRows(5);
-        jScrollPane2.setViewportView(jtxtA_listaEquipos);
+        Jtab_buscarProceso.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "ID Equipo", "Equipo", "SN", "marca", "Proceso", "usuario"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(Jtab_buscarProceso);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -139,15 +156,14 @@ public class BuscarEquipo extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(jbtn_buscarEquipo)
                                 .addGap(26, 26, 26)
-                                .addComponent(jbtn_mostrarEquipos, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 691, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(34, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jbtn_volver)
-                .addGap(53, 53, 53))
+                                .addComponent(jbtn_mostrarEquipos, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(14, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jbtn_volver, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 760, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(50, 50, 50))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -185,9 +201,9 @@ public class BuscarEquipo extends javax.swing.JFrame {
                             .addComponent(jlbl_tipoProceso, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jlbl_marcaEquipo)))
                     .addComponent(jlbl_setMarcaEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
                 .addComponent(jbtn_volver)
                 .addGap(14, 14, 14))
         );
@@ -215,10 +231,13 @@ public class BuscarEquipo extends javax.swing.JFrame {
 
         controlador.ContBuscarEquipo buscar = new controlador.ContBuscarEquipo();
         controlador.ContProceso proceso = new controlador.ContProceso();
+        DefaultTableModel modelo = (DefaultTableModel) Jtab_buscarProceso.getModel();
         Equipo equip = new Equipo();
         TipoEquipo tipoEquip = new TipoEquipo();
         Marca marc = new Marca();
         TipoProceso tipoProces = new TipoProceso();
+        Proceso proce = new Proceso();
+        Usuario user = new Usuario();
 
         String id = null;
         String equipo;
@@ -247,10 +266,24 @@ public class BuscarEquipo extends javax.swing.JFrame {
 
                 // aca definimos el numero de serie de lo recuperado con la busqueda del equipo por id
                 this.jlbl_setNumeroSerie.setText(equip.getNumero_serie());
+                
+                proce = buscar.buscarEquipo(id);
+                user = buscar.buscarUsuario(proce.getId_usuario());
 
-                tipoProces = buscar.buscarTipoProceso(tipoProces.getId_tipo_proceso());
+                tipoProces = buscar.buscarTipoProceso(proce.getId_tipo_proceso());
                 if (tipoProces != null && tipoProces.getNombre() != null) {
                     this.jlbl_setTipoProceso.setText(tipoProces.getNombre());
+                    
+                    String a,b,c,d,e,f;
+                    a=String.valueOf(proce.getId_equipo());
+                    b=tipoEquip.getTipo_equipo();
+                    c=equip.getNumero_serie();
+                    d=marc.getNombre_marca();
+                    e=tipoProces.getNombre();
+                    f=user.getNombre_usuario();
+                    
+                    String [] datos = {a,b,c,d,e,f};
+                    modelo.addRow(datos);
                 } else {
                     this.jlbl_setTipoProceso.setText("El equipo no ha sido ingresado a ningún proceso");
                 }
@@ -272,35 +305,98 @@ public class BuscarEquipo extends javax.swing.JFrame {
     }//GEN-LAST:event_jtxt_ingresarIdEquipoActionPerformed
 
     private void jbtn_mostrarEquiposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_mostrarEquiposActionPerformed
-
+       
         controlador.ContBuscarEquipo buscar = new controlador.ContBuscarEquipo();
+        controlador.ContProceso info = new controlador.ContProceso();
         bbdd.Conexion conec = new bbdd.Conexion();
+        DefaultTableModel modelo = (DefaultTableModel) Jtab_buscarProceso.getModel();
+        
 
-        ArrayList<controlador.ContBuscarEquipo> listarProcesos = new ArrayList<>();
-        TipoEquipo tipoEquipo = new TipoEquipo();
-        TipoProceso tipoProceso = new TipoProceso();
+        //ArrayList<controlador.ContBuscarEquipo> listarProcesos = new ArrayList<>();
+        ArrayList<Proceso> listaequipos = new ArrayList<>();
+        
+//        TipoEquipo tipoEquipo = new TipoEquipo();
+//        TipoProceso tipoProceso = new TipoProceso();
+//        Proceso proceso = new Proceso();
+//        Equipo equipo = new Equipo();
+//        Marca mrc = new Marca();
+//        Usuario user = new Usuario();
+//        String idEquipo = null;
+        //String info;
+        
+        listaequipos = buscar.buscarEquipoLista();
+        for (Proceso proce : listaequipos) {
+            String a,b,c,d,e,f;
+            TipoEquipo tipoEquipo = new TipoEquipo();
+            TipoProceso tipoProceso = new TipoProceso();
+            Proceso proceso = new Proceso();
+            Equipo equipo = new Equipo();
+            Marca mrc = new Marca();
+            Usuario user = new Usuario();
+            
+            proceso = buscar.buscarproceso(proce.getId_proceso());
+            a = String.valueOf(proceso.getId_equipo());
+            
+            equipo = info.buscarenProceso(String.valueOf(proceso.getId_equipo()));
+            
+            tipoEquipo =  info.buscartipo(equipo.getId_tipo_equipo());
+            b = tipoEquipo.getTipo_equipo();
+            c=equipo.getNumero_serie();
+            
+            mrc= info.marca(equipo.getId_marca());
+            d = mrc.getNombre_marca();
+            
+            tipoProceso = buscar.buscarTipoProceso(proceso.getId_tipo_proceso());
+            e = tipoProceso.getNombre();
+            
+            user = buscar.buscarUsuario(proceso.getId_usuario());
+            f = user.getNombre_usuario();
+            
+            String [] datos = {a,b,c,d,e,f};
+            modelo.addRow(datos);
+        }
+//        idEquipo = this.jtxt_ingresarIdEquipo.getText();      
+//        
+//        listaequipos = buscar.buscarEquipoLista(idEquipo);
+//        
+//        for (Proceso equip : listaequipos) {
+//            
+//            int idequip;
+//            String model,sn,mar,pro,us;
+//            proceso = equip;
+//            equipo = buscar.buscarEquipo(proceso.getId_equipo());
+//            tipoProceso = buscar.buscarTipoProceso(proceso.getId_tipo_proceso());
+//            mrc = info.marca(equipo.getId_marca());
+//            user= buscar.buscarUsuario(proceso.getId_usuario());
+//            tipoEquipo= info.buscartipo(equipo.getId_tipo_equipo()); 
+//            
+//            idequip=proceso.getId_equipo();
+//            model=tipoEquipo.getTipo_equipo();
+//            sn=equipo.getNumero_serie();
+//            mar= mrc.getNombre_marca();
+//            pro=tipoProceso.getNombre();
+//            us=user.getNombre_usuario();
+//            String [] datos ={String.valueOf(idequip),model,sn,mar,pro,us};
+//            modelo.addRow(datos);
+//            
+//            
+//        }
 
-        Proceso proceso = new Proceso();
-        Equipo equipo = new Equipo();
-        Marca mrc = new Marca();
-        String idEquipo = null;
-        String info;
-
-        //listarProcesos = buscar.buscarEquipo(idEquipo);
-        tipoProceso = buscar.buscarTipoProceso(tipoProceso.getId_tipo_proceso());
-        equipo = buscar.buscarEquipo(equipo.getId_equipo());
-        mrc = buscar.buscarMarca(mrc.getId_marca());
-        tipoEquipo = buscar.buscarTipoEquipo(tipoEquipo.getId_tipo_equipo());
-
-        // Construir la cadena con la información
-        info = "ID Equipo: " + equipo.getId_equipo() + "\t"
-                + "Nombre: " + tipoEquipo.getTipo_equipo() + "\t"
-                + "Modelo: " + equipo.getModelo() + "\t"
-                + "Código de Serie: " + equipo.getNumero_serie() + "\t"
-                + "Tipo Proceso: " + tipoProceso.getNombre() + "\t";
-
-        // Mostrar la información en el JTextArea
-        jtxtA_listaEquipos.setText(info.toString());
+//        //listarProcesos = buscar.buscarEquipo(idEquipo);
+//        tipoProceso = buscar.buscarTipoProceso(tipoProceso.getId_tipo_proceso());
+//        equipo = buscar.buscarEquipo(equipo.getId_equipo());
+//        mrc = buscar.buscarMarca(mrc.getId_marca());
+//        tipoEquipo = buscar.buscarTipoEquipo(tipoEquipo.getId_tipo_equipo());
+//
+//        // Construir la cadena con la información
+//        info = "ID Equipo: " + equipo.getId_equipo() + "\t"
+//                + "Nombre: " + tipoEquipo.getTipo_equipo() + "\t"
+//                + "Modelo: " + equipo.getModelo() + "\t"
+//                + "Código de Serie: " + equipo.getNumero_serie() + "\t"
+//                + "Tipo Proceso: " + tipoProceso.getNombre() + "\t";
+//
+//        // Mostrar la información en el JTextArea
+//        jtxtA_listaEquipos.setText(info.toString());
 
     }//GEN-LAST:event_jbtn_mostrarEquiposActionPerformed
 
@@ -375,9 +471,10 @@ public class BuscarEquipo extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable Jtab_buscarProceso;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbtn_buscarEquipo;
     private javax.swing.JButton jbtn_mostrarEquipos;
     private javax.swing.JButton jbtn_volver;
@@ -392,7 +489,6 @@ public class BuscarEquipo extends javax.swing.JFrame {
     private javax.swing.JLabel jlbl_setNumeroSerie;
     private javax.swing.JLabel jlbl_setTipoProceso;
     private javax.swing.JLabel jlbl_tipoProceso;
-    private javax.swing.JTextArea jtxtA_listaEquipos;
     private javax.swing.JTextField jtxt_ingresarIdEquipo;
     // End of variables declaration//GEN-END:variables
 }
