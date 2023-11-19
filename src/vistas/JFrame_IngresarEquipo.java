@@ -1,11 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package vistas;
 
+import java.awt.HeadlessException;
+import javax.swing.JOptionPane;
 import modelo.Equipo;
 import modelo.Marca;
+import modelo.Proceso;
 import modelo.TipoEquipo;
 
 /**
@@ -46,7 +45,7 @@ public class JFrame_IngresarEquipo extends javax.swing.JFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         jtxp_modelo = new javax.swing.JTextPane();
         jtbn_guardar = new javax.swing.JButton();
-        jbtn_cancelar = new javax.swing.JButton();
+        jbtn_cerrar = new javax.swing.JButton();
         jlb_tipoEquipo = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
         jtxp_tipoEquipo = new javax.swing.JTextPane();
@@ -96,10 +95,10 @@ public class JFrame_IngresarEquipo extends javax.swing.JFrame {
             }
         });
 
-        jbtn_cancelar.setText("Cancelar");
-        jbtn_cancelar.addActionListener(new java.awt.event.ActionListener() {
+        jbtn_cerrar.setText("Cerrar");
+        jbtn_cerrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtn_cancelarActionPerformed(evt);
+                jbtn_cerrarActionPerformed(evt);
             }
         });
 
@@ -118,7 +117,7 @@ public class JFrame_IngresarEquipo extends javax.swing.JFrame {
                         .addGap(78, 78, 78)
                         .addComponent(jtbn_guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 161, Short.MAX_VALUE)
-                        .addComponent(jbtn_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jbtn_cerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(117, 117, 117))
                     .addGroup(jpnl_panelMenuLayout.createSequentialGroup()
                         .addGroup(jpnl_panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -184,7 +183,7 @@ public class JFrame_IngresarEquipo extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                 .addGroup(jpnl_panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtbn_guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbtn_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jbtn_cerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(34, 34, 34))
         );
 
@@ -210,8 +209,8 @@ public class JFrame_IngresarEquipo extends javax.swing.JFrame {
 
     private void jtxt_idEquipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxt_idEquipoActionPerformed
         // TODO add your handling code here:
-        
-        
+
+
     }//GEN-LAST:event_jtxt_idEquipoActionPerformed
 
     private void jtxt_usuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxt_usuarioActionPerformed
@@ -221,42 +220,86 @@ public class JFrame_IngresarEquipo extends javax.swing.JFrame {
     private void jbtn_buscarIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_buscarIDActionPerformed
         // TODO add your handling code here:
         this.jtxt_idEquipo.requestFocus();
-        
+
         controlador.ContIngresar proceso = new controlador.ContIngresar();
         Equipo equi = new Equipo();
         TipoEquipo tipo = new TipoEquipo();
         Marca marca = new Marca();
-        
-        String idEquipo,equipo;
-        int estado;
-        
-        idEquipo = jtxt_idEquipo.getText();
-        
-        equi = proceso.buscarEquipoEnProceso(idEquipo);
-        this.jtxp_modelo.setText(equi.getModelo());
-        
-        tipo = proceso.buscarTipo(equi.getId_tipo_equipo());
-        this.jtxp_tipoEquipo.setText(tipo.getTipo_equipo());
-        
-        marca = proceso.buscarMarca(equi.getId_marca());
-        this.jtxp_marca.setText(marca.getNombre_marca());
-        
-        this.jtxp_serialN.setText(equi.getNumero_serie());
+
+        String idEquipo, equipo;
+        //int estado;
+
+        try {
+            if (jtxt_idEquipo.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(rootPane, "Debe ingresar un ID de Equipo", "Atención", JOptionPane.WARNING_MESSAGE);
+            } else {
+
+                idEquipo = jtxt_idEquipo.getText();
+
+                equi = proceso.buscarEquipoEnProceso(idEquipo);
+                this.jtxp_modelo.setText(equi.getModelo());
+
+                tipo = proceso.buscarTipo(equi.getId_tipo_equipo());
+                this.jtxp_tipoEquipo.setText(tipo.getTipo_equipo());
+
+                marca = proceso.buscarMarca(equi.getId_marca());
+                this.jtxp_marca.setText(marca.getNombre_marca());
+
+                this.jtxp_serialN.setText(equi.getNumero_serie());
+
+                if (this.jtxp_modelo.getText().isEmpty() && this.jtxp_tipoEquipo.getText().isEmpty() && this.jtxp_marca.getText().isEmpty() && this.jtxp_serialN.getText().isEmpty()) {
+                    JOptionPane.showMessageDialog(rootPane, "Equipo no encontrado", "Atención", JOptionPane.WARNING_MESSAGE);
+                }
+
+            }
+        } catch (HeadlessException e) {
+            JOptionPane.showMessageDialog(rootPane, "Equipo no encontrado", "Atención", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_jbtn_buscarIDActionPerformed
 
     private void jtbn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtbn_guardarActionPerformed
-        // TODO add your handling code here:
-        
-        //controlador.ContIngresar proceso = new controlador.ContIngresar();
-        
-        
+
+        controlador.ContIngresar ingEquip = new controlador.ContIngresar();
+        Proceso proceso = new Proceso();
+
+        if (this.jtxt_idEquipo.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "ID Equipo no ingresado", "Atención", JOptionPane.WARNING_MESSAGE);
+        } else {
+            if (this.jtxt_usuario.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(rootPane, "ID Usuario no ingresado", "Atención", JOptionPane.WARNING_MESSAGE);
+            } else {
+                if (this.jtxp_modelo.getText().isEmpty() && this.jtxp_tipoEquipo.getText().isEmpty() && this.jtxp_marca.getText().isEmpty() && this.jtxp_serialN.getText().isEmpty()) {
+                    JOptionPane.showMessageDialog(rootPane, "ID Equipo no encontrado, favor verificar", "Atención", JOptionPane.WARNING_MESSAGE);
+                } else {
+
+                    int idEq = Integer.parseInt(this.jtxt_idEquipo.getText());
+                    int idUsua = Integer.parseInt(this.jtxt_usuario.getText());
+
+                    proceso.setId_equipo(idEq);
+                    proceso.setId_usuario(idUsua);
+
+                    try {
+
+                        ingEquip.agregarProceso(proceso);
+                        JOptionPane.showMessageDialog(rootPane, "Proceso Ingresado", "", JOptionPane.INFORMATION_MESSAGE);
+                        this.dispose();
+
+                    } catch (HeadlessException e) {
+                        JOptionPane.showMessageDialog(rootPane, "Proceso No Ingresado", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+
+                }
+            }
+        }
+
+
     }//GEN-LAST:event_jtbn_guardarActionPerformed
 
-    private void jbtn_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_cancelarActionPerformed
+    private void jbtn_cerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_cerrarActionPerformed
         // TODO add your handling code here:
-        
+
         this.dispose();
-    }//GEN-LAST:event_jbtn_cancelarActionPerformed
+    }//GEN-LAST:event_jbtn_cerrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -299,7 +342,7 @@ public class JFrame_IngresarEquipo extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JButton jbtn_buscarID;
-    private javax.swing.JButton jbtn_cancelar;
+    private javax.swing.JButton jbtn_cerrar;
     private javax.swing.JLabel jlb_idEquipo;
     private javax.swing.JLabel jlb_marca;
     private javax.swing.JLabel jlb_modelo;

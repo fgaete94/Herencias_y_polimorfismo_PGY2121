@@ -24,13 +24,13 @@ public class ContIngresar {
             Conexion conex = new Conexion();
             Connection connect = conex.obtenerConexionOracle();
             
-            String query = "INSERT INTO PROCESO VALUES (PROCESO_IDPROCESO_SEC.nextval,?,SYSDATE,?,?)";
+            String query = "INSERT INTO PROCESO VALUES (PROCESO_IDPROCESO_SEC.nextval,?,SYSDATE,1,?)";
             PreparedStatement statm = connect.prepareStatement(query);
             //statm.setString(1,"PROCESO_IDPROCESO_SEC.nextval");
             statm.setString(1, String.valueOf(proceso.getId_usuario()));
             //statm.setString(3, "SYSDATE");
-            statm.setString(2, String.valueOf(proceso.getId_tipo_proceso()));
-            statm.setString(3, String.valueOf(proceso.getId_equipo()));
+            //statm.setString(2, String.valueOf(proceso.getId_tipo_proceso()));
+            statm.setString(2, String.valueOf(proceso.getId_equipo()));
             
             statm.executeUpdate();
             statm.close();
