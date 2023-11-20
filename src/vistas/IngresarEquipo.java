@@ -4,6 +4,10 @@
  */
 package vistas;
 
+import java.awt.Graphics;
+import java.awt.Image;
+import javax.swing.ImageIcon;
+import javax.swing.JPanel;
 import modelo.Equipo;
 import modelo.Marca;
 import modelo.TipoEquipo;
@@ -12,12 +16,19 @@ import modelo.TipoEquipo;
  *
  * @author jcifu
  */
-public class JFrame_IngresarEquipo extends javax.swing.JFrame {
+
+
+public class IngresarEquipo extends javax.swing.JFrame {
 
     /**
      * Creates new form JFrame_IngresarEquipo
      */
-    public JFrame_IngresarEquipo() {
+    
+    FondoPanel fondoI = new FondoPanel();
+
+    public IngresarEquipo() {
+        this.setContentPane(fondoI);
+
         initComponents();
     }
 
@@ -30,30 +41,31 @@ public class JFrame_IngresarEquipo extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jpnl_panelMenu = new javax.swing.JPanel();
         jlb_idEquipo = new javax.swing.JLabel();
         jtxt_idEquipo = new javax.swing.JTextField();
-        jbtn_buscarID = new javax.swing.JButton();
         jlb_usuario = new javax.swing.JLabel();
         jtxt_usuario = new javax.swing.JTextField();
-        jlb_marca = new javax.swing.JLabel();
-        jlb_modelo = new javax.swing.JLabel();
-        jlb_serial = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jtxp_serialN = new javax.swing.JTextPane();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jtxp_marca = new javax.swing.JTextPane();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        jtxp_modelo = new javax.swing.JTextPane();
-        jtbn_guardar = new javax.swing.JButton();
-        jbtn_cancelar = new javax.swing.JButton();
+        jbtn_buscarID = new javax.swing.JButton();
         jlb_tipoEquipo = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
         jtxp_tipoEquipo = new javax.swing.JTextPane();
+        jlb_marca = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jtxp_marca = new javax.swing.JTextPane();
+        jlb_modelo = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jtxp_modelo = new javax.swing.JTextPane();
+        jlb_serial = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jtxp_serialN = new javax.swing.JTextPane();
+        jtbn_guardar = new javax.swing.JButton();
+        jbtn_cancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Ingresar Equipo");
 
+        jlb_idEquipo.setBackground(new java.awt.Color(0, 0, 102));
+        jlb_idEquipo.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 14)); // NOI18N
         jlb_idEquipo.setText("ID EQUIPO:");
 
         jtxt_idEquipo.addActionListener(new java.awt.event.ActionListener() {
@@ -62,13 +74,8 @@ public class JFrame_IngresarEquipo extends javax.swing.JFrame {
             }
         });
 
-        jbtn_buscarID.setText("Buscar");
-        jbtn_buscarID.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtn_buscarIDActionPerformed(evt);
-            }
-        });
-
+        jlb_usuario.setBackground(new java.awt.Color(0, 0, 102));
+        jlb_usuario.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 14)); // NOI18N
         jlb_usuario.setText("USUARIO:");
 
         jtxt_usuario.addActionListener(new java.awt.event.ActionListener() {
@@ -77,18 +84,42 @@ public class JFrame_IngresarEquipo extends javax.swing.JFrame {
             }
         });
 
+        jbtn_buscarID.setBackground(new java.awt.Color(0, 0, 102));
+        jbtn_buscarID.setForeground(new java.awt.Color(255, 255, 255));
+        jbtn_buscarID.setText("Buscar");
+        jbtn_buscarID.setBorder(new javax.swing.border.MatteBorder(null));
+        jbtn_buscarID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtn_buscarIDActionPerformed(evt);
+            }
+        });
+
+        jlb_tipoEquipo.setBackground(new java.awt.Color(0, 0, 102));
+        jlb_tipoEquipo.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 14)); // NOI18N
+        jlb_tipoEquipo.setText("Tipo Equipo:");
+
+        jScrollPane5.setViewportView(jtxp_tipoEquipo);
+
+        jlb_marca.setBackground(new java.awt.Color(0, 0, 102));
+        jlb_marca.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 14)); // NOI18N
         jlb_marca.setText("Marca: ");
 
+        jScrollPane3.setViewportView(jtxp_marca);
+
+        jlb_modelo.setBackground(new java.awt.Color(0, 0, 102));
+        jlb_modelo.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 14)); // NOI18N
         jlb_modelo.setText("Modelo:");
 
+        jScrollPane4.setViewportView(jtxp_modelo);
+
+        jlb_serial.setBackground(new java.awt.Color(0, 0, 102));
+        jlb_serial.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 14)); // NOI18N
         jlb_serial.setText("Numero de Serie:");
 
         jScrollPane1.setViewportView(jtxp_serialN);
 
-        jScrollPane3.setViewportView(jtxp_marca);
-
-        jScrollPane4.setViewportView(jtxp_modelo);
-
+        jtbn_guardar.setBackground(new java.awt.Color(0, 0, 102));
+        jtbn_guardar.setForeground(new java.awt.Color(255, 255, 255));
         jtbn_guardar.setText("Guardar");
         jtbn_guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -96,6 +127,8 @@ public class JFrame_IngresarEquipo extends javax.swing.JFrame {
             }
         });
 
+        jbtn_cancelar.setBackground(new java.awt.Color(0, 0, 102));
+        jbtn_cancelar.setForeground(new java.awt.Color(255, 255, 255));
         jbtn_cancelar.setText("Cancelar");
         jbtn_cancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -103,106 +136,80 @@ public class JFrame_IngresarEquipo extends javax.swing.JFrame {
             }
         });
 
-        jlb_tipoEquipo.setText("Tipo Equipo:");
-
-        jScrollPane5.setViewportView(jtxp_tipoEquipo);
-
-        javax.swing.GroupLayout jpnl_panelMenuLayout = new javax.swing.GroupLayout(jpnl_panelMenu);
-        jpnl_panelMenu.setLayout(jpnl_panelMenuLayout);
-        jpnl_panelMenuLayout.setHorizontalGroup(
-            jpnl_panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpnl_panelMenuLayout.createSequentialGroup()
-                .addGap(65, 65, 65)
-                .addGroup(jpnl_panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jpnl_panelMenuLayout.createSequentialGroup()
-                        .addGap(78, 78, 78)
-                        .addComponent(jtbn_guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 161, Short.MAX_VALUE)
-                        .addComponent(jbtn_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(117, 117, 117))
-                    .addGroup(jpnl_panelMenuLayout.createSequentialGroup()
-                        .addGroup(jpnl_panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jpnl_panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(jpnl_panelMenuLayout.createSequentialGroup()
-                                    .addGroup(jpnl_panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addGroup(jpnl_panelMenuLayout.createSequentialGroup()
-                                            .addGroup(jpnl_panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                .addComponent(jlb_modelo, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(jlb_marca, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGap(56, 56, 56))
-                                        .addGroup(jpnl_panelMenuLayout.createSequentialGroup()
-                                            .addComponent(jlb_tipoEquipo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addGap(41, 41, 41)))
-                                    .addGroup(jpnl_panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
-                                        .addComponent(jScrollPane4)
-                                        .addComponent(jScrollPane5)))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpnl_panelMenuLayout.createSequentialGroup()
-                                    .addComponent(jlb_serial)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jpnl_panelMenuLayout.createSequentialGroup()
-                                .addGroup(jpnl_panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jlb_usuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jlb_idEquipo, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jpnl_panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jtxt_idEquipo)
-                                    .addComponent(jtxt_usuario, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE))
-                                .addGap(18, 18, 18)
-                                .addComponent(jbtn_buscarID)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-        );
-        jpnl_panelMenuLayout.setVerticalGroup(
-            jpnl_panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpnl_panelMenuLayout.createSequentialGroup()
-                .addGap(49, 49, 49)
-                .addGroup(jpnl_panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlb_idEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtxt_idEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbtn_buscarID))
-                .addGap(18, 18, 18)
-                .addGroup(jpnl_panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlb_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtxt_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(75, 75, 75)
-                .addGroup(jpnl_panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jlb_tipoEquipo)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jpnl_panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jlb_marca)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jpnl_panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jlb_modelo)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jpnl_panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jlb_serial)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
-                .addGroup(jpnl_panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtbn_guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jbtn_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34))
-        );
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jpnl_panelMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(136, 136, 136)
+                        .addComponent(jtbn_guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(148, 148, 148)
+                        .addComponent(jbtn_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(65, 65, 65)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jlb_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jlb_tipoEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(jlb_marca, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jlb_modelo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jlb_idEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(12, 12, 12)))
+                                .addGap(32, 32, 32))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jlb_serial)
+                                .addGap(18, 18, 18)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1)
+                            .addComponent(jtxt_usuario, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jtxt_idEquipo, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addGap(35, 35, 35)
+                        .addComponent(jbtn_buscarID, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(117, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jpnl_panelMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addContainerGap(138, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlb_idEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtxt_idEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbtn_buscarID, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlb_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtxt_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jlb_tipoEquipo)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jlb_marca)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jlb_modelo)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jlb_serial)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(42, 42, 42)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtbn_guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbtn_cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(39, 39, 39))
         );
 
         pack();
@@ -258,6 +265,23 @@ public class JFrame_IngresarEquipo extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jbtn_cancelarActionPerformed
 
+    class FondoPanel extends JPanel
+    {
+        private Image imagen;
+        
+        @Override
+        public void paint (Graphics g)
+        {
+            imagen = new ImageIcon(getClass().getResource("/imagenes/Ingresar.jpg")).getImage();
+            
+            g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this);
+            
+            setOpaque(false);
+            
+            super.paint(g);
+        }
+        
+    }
     /**
      * @param args the command line arguments
      */
@@ -306,7 +330,6 @@ public class JFrame_IngresarEquipo extends javax.swing.JFrame {
     private javax.swing.JLabel jlb_serial;
     private javax.swing.JLabel jlb_tipoEquipo;
     private javax.swing.JLabel jlb_usuario;
-    private javax.swing.JPanel jpnl_panelMenu;
     private javax.swing.JButton jtbn_guardar;
     private javax.swing.JTextPane jtxp_marca;
     private javax.swing.JTextPane jtxp_modelo;
