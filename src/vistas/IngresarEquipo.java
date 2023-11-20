@@ -28,8 +28,8 @@ public class IngresarEquipo extends javax.swing.JFrame {
 
     public IngresarEquipo() {
         this.setContentPane(fondoI);
-
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -63,6 +63,7 @@ public class IngresarEquipo extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Ingresar Equipo");
+        setPreferredSize(new java.awt.Dimension(955, 715));
 
         jlb_idEquipo.setBackground(new java.awt.Color(0, 0, 102));
         jlb_idEquipo.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 14)); // NOI18N
