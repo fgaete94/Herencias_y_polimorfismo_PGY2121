@@ -60,15 +60,18 @@ public class BuscarEquipo extends javax.swing.JFrame {
         Jtab_buscarProceso = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jlbl_ingresarId.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 14)); // NOI18N
         jlbl_ingresarId.setText("Ingresa ID del Equipo");
+        getContentPane().add(jlbl_ingresarId, new org.netbeans.lib.awtextra.AbsoluteConstraints(39, 90, 129, 24));
 
         jtxt_ingresarIdEquipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jtxt_ingresarIdEquipoActionPerformed(evt);
             }
         });
+        getContentPane().add(jtxt_ingresarIdEquipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(171, 90, 189, 24));
 
         jbtn_buscarEquipo.setText("Buscar");
         jbtn_buscarEquipo.addActionListener(new java.awt.event.ActionListener() {
@@ -76,18 +79,29 @@ public class BuscarEquipo extends javax.swing.JFrame {
                 jbtn_buscarEquipoActionPerformed(evt);
             }
         });
+        getContentPane().add(jbtn_buscarEquipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(378, 91, -1, -1));
 
         jlbl_nombreEquipo.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 14)); // NOI18N
         jlbl_nombreEquipo.setText("Nombre Equipo:");
+        getContentPane().add(jlbl_nombreEquipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(39, 140, 90, -1));
+        getContentPane().add(jlbl_setNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 140, 122, 16));
 
         jlbl_modelo.setText("Modelo Equipo:");
+        getContentPane().add(jlbl_modelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 137, -1, -1));
+        getContentPane().add(jlbl_setModeloEquipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(371, 137, 124, 22));
 
         jlbl_numeroSerie.setText("Número Serie:");
+        getContentPane().add(jlbl_numeroSerie, new org.netbeans.lib.awtextra.AbsoluteConstraints(507, 137, -1, -1));
+        getContentPane().add(jlbl_setNumeroSerie, new org.netbeans.lib.awtextra.AbsoluteConstraints(588, 131, 118, 22));
 
         jlbl_marcaEquipo.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 14)); // NOI18N
         jlbl_marcaEquipo.setText("Marca Equipo:");
+        getContentPane().add(jlbl_marcaEquipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(39, 180, 100, -1));
+        getContentPane().add(jlbl_setMarcaEquipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(145, 174, 134, 22));
 
         jlbl_tipoProceso.setText("Tipo Proceso: ");
+        getContentPane().add(jlbl_tipoProceso, new org.netbeans.lib.awtextra.AbsoluteConstraints(285, 180, -1, -1));
+        getContentPane().add(jlbl_setTipoProceso, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 187, 346, 16));
 
         jbtn_mostrarEquipos.setText("Mostrar Todos");
         jbtn_mostrarEquipos.addActionListener(new java.awt.event.ActionListener() {
@@ -95,6 +109,7 @@ public class BuscarEquipo extends javax.swing.JFrame {
                 jbtn_mostrarEquiposActionPerformed(evt);
             }
         });
+        getContentPane().add(jbtn_mostrarEquipos, new org.netbeans.lib.awtextra.AbsoluteConstraints(476, 91, 117, 24));
 
         jbtn_volver.setText("Volver");
         jbtn_volver.addActionListener(new java.awt.event.ActionListener() {
@@ -102,6 +117,7 @@ public class BuscarEquipo extends javax.swing.JFrame {
                 jbtn_volverActionPerformed(evt);
             }
         });
+        getContentPane().add(jbtn_volver, new org.netbeans.lib.awtextra.AbsoluteConstraints(56, 578, -1, -1));
 
         Jtab_buscarProceso.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -121,100 +137,7 @@ public class BuscarEquipo extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(Jtab_buscarProceso);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(47, 47, 47)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 760, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jlbl_ingresarId, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jlbl_nombreEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jlbl_marcaEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jlbl_setNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jlbl_setMarcaEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jlbl_tipoProceso)))))))
-                .addContainerGap(60, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(280, 280, 280)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jlbl_modelo)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jlbl_setModeloEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jlbl_numeroSerie)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jlbl_setNumeroSerie, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(80, 80, 80)
-                                    .addComponent(jlbl_setTipoProceso, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(171, 171, 171)
-                            .addComponent(jtxt_ingresarIdEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(jbtn_buscarEquipo)
-                            .addGap(26, 26, 26)
-                            .addComponent(jbtn_mostrarEquipos, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(56, 56, 56)
-                            .addComponent(jbtn_volver)))
-                    .addGap(51, 161, Short.MAX_VALUE)))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(90, 90, 90)
-                .addComponent(jlbl_ingresarId, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jlbl_nombreEquipo)
-                    .addComponent(jlbl_setNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jlbl_marcaEquipo)
-                    .addComponent(jlbl_setMarcaEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jlbl_tipoProceso))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(81, 81, 81))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(90, 90, 90)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jtxt_ingresarIdEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jbtn_buscarEquipo)
-                        .addComponent(jbtn_mostrarEquipos, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jlbl_setNumeroSerie, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(6, 6, 6)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jlbl_modelo, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jlbl_numeroSerie, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addComponent(jlbl_setModeloEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGap(28, 28, 28)
-                    .addComponent(jlbl_setTipoProceso, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(375, 375, 375)
-                    .addComponent(jbtn_volver)
-                    .addGap(23, 23, 23)))
-        );
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(47, 227, 760, 316));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -498,22 +421,22 @@ public class BuscarEquipo extends javax.swing.JFrame {
 //            }
 //        });
 //    }
-       class FondoPanel extends JPanel {
-
+       class FondoPanel extends JPanel
+    {
         private Image imagen;
-
-        public FondoPanel() {
-            imagen = new ImageIcon(getClass().getResource("/imagenes/tres.jpg")).getImage();
-            setOpaque(false);
-        }
-
+        
         @Override
-        protected void paintComponent(Graphics g) {
-            super.paintComponent(g); // Pinta los componentes hijos
-
-            // Dibuja la imagen de fondo después de los componentes
+        public void paint (Graphics g)
+        {
+            imagen = new ImageIcon(getClass().getResource("/imagenes/buscar.jpg")).getImage();
+            
             g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this);
+            
+            setOpaque(false);
+            
+            super.paint(g);
         }
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
