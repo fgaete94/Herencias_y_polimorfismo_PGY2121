@@ -15,9 +15,9 @@ public class Conexion {
 
 
 
-    //private static final String WALLET_PATH = "C:\\Users\\pipeg\\OneDrive\\Escritorio\\proyecto software\\wallet prueba";
+    ///private static final String WALLET_PATH = "C:\\Users\\pipeg\\OneDrive\\Escritorio\\proyecto software\\wallet prueba";
     private static final String WALLET_PATH = "C:\\Users\\Ariel Mathias\\Desktop\\NetBeansProyect\\Wallet";
-    //private static final String WALLET_PATH = "C:\\Users\\jcifu\\OneDrive\\Documentos\\Wallet";
+    ///private static final String WALLET_PATH = "C:\\Users\\jcifu\\OneDrive\\Documentos\\Wallet";
     
  
 
