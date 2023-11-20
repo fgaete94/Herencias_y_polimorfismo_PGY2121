@@ -30,6 +30,7 @@ public class ContBuscarEquipo {
             // Aquí creamos el objeto conexion de la Clase Conexion
             Conexion conexion = new Conexion();
             Connection cnt = conexion.obtenerConexionOracle();
+            
             String query = "SELECT * FROM PROCESO";
             PreparedStatement pstmt = cnt.prepareStatement(query);
 
@@ -50,6 +51,10 @@ public class ContBuscarEquipo {
 //                    proceso1.setId_tipo_proceso(rst.getInt("id_tipo_proceso"));
 //                    proceso1.setId_usuario(rst.getInt("id_usuario"));
 //                }
+            rst.close();
+            pstmt.close();
+            cnt.close();
+           
         } catch (Exception e) {
             System.out.println("Error de SQL al insertar equipo" + e.getMessage());
         }
@@ -77,6 +82,10 @@ public class ContBuscarEquipo {
                 proceso.setId_tipo_proceso(rst.getInt("id_tipo_proceso"));
                 proceso.setId_equipo(rst.getInt("id_equipo"));
             }
+            
+            rst.close();
+            pstmt.close();
+            cnt.close();
 
         } catch (Exception e) {
             System.out.println("Error de SQL al consultar proceso" + e.getMessage());
@@ -139,6 +148,9 @@ public class ContBuscarEquipo {
                 tipo.setId_tipo_proceso(rst.getInt("id_tipo_proceso"));
                 tipo.setNombre(rst.getString("nombre"));
             }
+            rst.close();
+            pstmt.close();
+            cnt.close();
 
         } catch (Exception e) {
             System.out.println("Error de SQL al insertar equipo" + e.getMessage());
@@ -165,6 +177,9 @@ public class ContBuscarEquipo {
                 equipo.setModelo(rst.getString("modelo"));
 
             }
+            rst.close();
+            pstmt.close();
+            cnt.close();
 
         } catch (Exception e) {
             System.out.println("Error de SQL al insertar equipo" + e.getMessage());
@@ -193,6 +208,9 @@ public class ContBuscarEquipo {
                 mrc.setNombre_marca(rst.getString("nombre_marca"));
 
             }
+            rst.close();
+            pstmt.close();
+            cnt.close();
 
         } catch (Exception e) {
             System.out.println("Error de SQL al insertar equipo" + e.getMessage());
@@ -219,6 +237,9 @@ public class ContBuscarEquipo {
                 tipoEqui.setId_tipo_equipo(rst.getInt("id_tipo_equipo"));
                 tipoEqui.setTipo_equipo(rst.getString("tipo_equipo"));
             }
+            rst.close();
+            pstmt.close();
+            cnt.close();
 
         } catch (Exception e) {
             System.out.println("Error de SQL al buscar tipo equipo" + e.getMessage());
@@ -245,6 +266,9 @@ public class ContBuscarEquipo {
                 user.setNombre_usuario(rst.getString("nombre_usuario"));
                 user.setId_estamento(rst.getInt("id_estamento"));
             }
+            rst.close();
+            pstmt.close();
+            cnt.close();
 
         } catch (Exception e) {
             System.out.println("Error de SQL al buscar usuario" + e.getMessage());
@@ -272,10 +296,51 @@ public class ContBuscarEquipo {
                 proce.setId_tipo_proceso(rst.getInt("id_tipo_proceso"));
                 proce.setId_equipo(rst.getInt("id_equipo"));
             }
+            rst.close();
+            pstmt.close();
+            cnt.close();
 
         } catch (Exception e) {
             System.out.println("Error de SQL al buscar usuario" + e.getMessage());
         }
         return proce; 
     }
+    
+//    public ArrayList<Proceso> buscarTodos() {
+//
+//        //Proceso proceso = new Proceso();
+//        ArrayList<Proceso> listaProceso = new ArrayList<>();
+//
+//        try {
+//            // Aquí creamos el objeto conexion de la Clase Conexion
+//            Conexion conexion = new Conexion();
+//            Connection cnt = conexion.obtenerConexionOracle();
+//            
+//            String query = "SELECT * FROM PROCESO";
+//            PreparedStatement pstmt = cnt.prepareStatement(query);
+//
+//            ResultSet rst = pstmt.executeQuery();
+//
+//            while (rst.next()) {
+//                Proceso proceso = new Proceso();
+//                proceso.setId_equipo(rst.getInt("id_equipo"));
+//                proceso.setId_proceso(rst.getInt("id_proceso"));
+//                proceso.setId_tipo_proceso(rst.getInt("id_tipo_proceso"));
+//                proceso.setId_usuario(rst.getInt("id_usuario"));
+//                listaProceso.add(proceso);
+//            }
+//
+////                if (rst.next()) {
+////                    proceso1.setId_equipo(rst.getInt("id_equipo"));
+////                    proceso1.setId_proceso(rst.getInt("id_proceso"));
+////                    proceso1.setId_tipo_proceso(rst.getInt("id_tipo_proceso"));
+////                    proceso1.setId_usuario(rst.getInt("id_usuario"));
+////                }
+//        } catch (Exception e) {
+//            System.out.println("Error de SQL al insertar equipo" + e.getMessage());
+//        }
+//
+//        return listaProceso;
+//    }
+    
 }
