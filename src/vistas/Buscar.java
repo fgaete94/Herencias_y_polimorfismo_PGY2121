@@ -129,7 +129,7 @@ public class Buscar extends javax.swing.JFrame {
 
         Jtab_buscarProceso.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null}
+
             },
             new String [] {
                 "ID Equipo", "Nombre Equipo", "Número de Serie", "Nombre Marca", "Nombre Proceso", "Nombre Usuario"
@@ -138,9 +138,16 @@ public class Buscar extends javax.swing.JFrame {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         jScrollPane1.setViewportView(Jtab_buscarProceso);
@@ -327,13 +334,13 @@ public class Buscar extends javax.swing.JFrame {
             Equipo equipo = buscarEquipos.buscarEquipo(proceso.getId_equipo());
             TipoProceso tipoProceso = buscarEquipos.buscarTipoProceso(proceso.getId_tipo_proceso());
             Usuario usuario = buscarEquipos.buscarUsuario(proceso.getId_usuario());
-            Marca marca = buscarEquipos.buscarMarca(equipo.getId_marca());
+            Marca marc = buscarEquipos.buscarMarca(equipo.getId_marca());
 
             Object[] fila = {
                 equipo.getId_equipo(), // ID Equipo
                 equipo.getModelo(), // Nombre del Equipo
                 equipo.getNumero_serie(), // Número de Serie
-                marca.getNombre_marca(), // Nombre de la Marca
+                marc.getNombre_marca(), // Nombre de la Marca
                 tipoProceso.getNombre(), // Nombre del Proceso
                 usuario.getNombre_usuario() // Nombre del Usuario
             };

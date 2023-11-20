@@ -249,14 +249,48 @@
         <Component class="javax.swing.JTable" name="Jtab_buscarProceso">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="6" rowCount="1">
-                <Column editable="true" title="ID Equipo" type="java.lang.String"/>
-                <Column editable="true" title="Nombre Equipo" type="java.lang.String"/>
-                <Column editable="true" title="N&#xfa;mero de Serie" type="java.lang.String"/>
-                <Column editable="true" title="Nombre Marca" type="java.lang.String"/>
-                <Column editable="true" title="Nombre Proceso" type="java.lang.String"/>
-                <Column editable="true" title="Nombre Usuario" type="java.lang.String"/>
+              <Table columnCount="6" rowCount="0">
+                <Column editable="false" title="ID Equipo" type="java.lang.String"/>
+                <Column editable="false" title="Nombre Equipo" type="java.lang.String"/>
+                <Column editable="false" title="N&#xfa;mero de Serie" type="java.lang.String"/>
+                <Column editable="false" title="Nombre Marca" type="java.lang.String"/>
+                <Column editable="false" title="Nombre Proceso" type="java.lang.String"/>
+                <Column editable="false" title="Nombre Usuario" type="java.lang.String"/>
               </Table>
+            </Property>
+            <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+              <TableColumnModel selectionModel="0">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+              </TableColumnModel>
             </Property>
             <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>

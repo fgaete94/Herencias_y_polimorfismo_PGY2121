@@ -69,7 +69,7 @@ public class ContBuscarEquipo {
             // Aquí creamos el objeto conexion de la Clase Conexion
             Conexion conexion = new Conexion();
             Connection cnt = conexion.obtenerConexionOracle();
-            String query = "SELECT * FROM PROCESO WHERE id_equipo = ? ORDER BY 3DESC,4 DESC";
+            String query = "SELECT * FROM PROCESO WHERE id_equipo = ? ORDER BY 3 DESC";
             PreparedStatement pstmt = cnt.prepareStatement(query);
 
             pstmt.setString(1, String.valueOf(idEquip));

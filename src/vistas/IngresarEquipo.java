@@ -5,11 +5,14 @@
 package vistas;
 
 import java.awt.Graphics;
+import java.awt.HeadlessException;
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import modelo.Equipo;
 import modelo.Marca;
+import modelo.Proceso;
 import modelo.TipoEquipo;
 
 /**
@@ -130,7 +133,7 @@ public class IngresarEquipo extends javax.swing.JFrame {
 
         jbtn_cancelar.setBackground(new java.awt.Color(0, 0, 102));
         jbtn_cancelar.setForeground(new java.awt.Color(255, 255, 255));
-        jbtn_cancelar.setText("Cancelar");
+        jbtn_cancelar.setText("Cerrar");
         jbtn_cancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbtn_cancelarActionPerformed(evt);
@@ -229,34 +232,81 @@ public class IngresarEquipo extends javax.swing.JFrame {
     private void jbtn_buscarIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_buscarIDActionPerformed
         // TODO add your handling code here:
         this.jtxt_idEquipo.requestFocus();
-        
+
         controlador.ContIngresar proceso = new controlador.ContIngresar();
         Equipo equi = new Equipo();
         TipoEquipo tipo = new TipoEquipo();
         Marca marca = new Marca();
-        
-        String idEquipo,equipo;
-        int estado;
-        
-        idEquipo = jtxt_idEquipo.getText();
-        
-        equi = proceso.buscarEquipoEnProceso(idEquipo);
-        this.jtxp_modelo.setText(equi.getModelo());
-        
-        tipo = proceso.buscarTipo(equi.getId_tipo_equipo());
-        this.jtxp_tipoEquipo.setText(tipo.getTipo_equipo());
-        
-        marca = proceso.buscarMarca(equi.getId_marca());
-        this.jtxp_marca.setText(marca.getNombre_marca());
-        
-        this.jtxp_serialN.setText(equi.getNumero_serie());
+
+        String idEquipo, equipo;
+        //int estado;
+
+        try {
+            if (jtxt_idEquipo.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(rootPane, "Debe ingresar un ID de Equipo", "Atención", JOptionPane.WARNING_MESSAGE);
+            } else {
+
+                idEquipo = jtxt_idEquipo.getText();
+
+                equi = proceso.buscarEquipoEnProceso(idEquipo);
+                this.jtxp_modelo.setText(equi.getModelo());
+
+                tipo = proceso.buscarTipo(equi.getId_tipo_equipo());
+                this.jtxp_tipoEquipo.setText(tipo.getTipo_equipo());
+
+                marca = proceso.buscarMarca(equi.getId_marca());
+                this.jtxp_marca.setText(marca.getNombre_marca());
+
+                this.jtxp_serialN.setText(equi.getNumero_serie());
+
+                if (this.jtxp_modelo.getText().isEmpty() && this.jtxp_tipoEquipo.getText().isEmpty() && this.jtxp_marca.getText().isEmpty() && this.jtxp_serialN.getText().isEmpty()) {
+                    JOptionPane.showMessageDialog(rootPane, "Equipo no encontrado", "Atención", JOptionPane.WARNING_MESSAGE);
+                }
+
+            }
+        } catch (HeadlessException e) {
+            JOptionPane.showMessageDialog(rootPane, "Equipo no encontrado", "Atención", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_jbtn_buscarIDActionPerformed
 
     private void jtbn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtbn_guardarActionPerformed
         // TODO add your handling code here:
-        
+
+        controlador.ContIngresar ingEquip = new controlador.ContIngresar();
+        Proceso proceso = new Proceso();
+
+        if (this.jtxt_idEquipo.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(rootPane, "ID Equipo no ingresado", "Atención", JOptionPane.WARNING_MESSAGE);
+        } else {
+            if (this.jtxt_usuario.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(rootPane, "ID Usuario no ingresado", "Atención", JOptionPane.WARNING_MESSAGE);
+            } else {
+                if (this.jtxp_modelo.getText().isEmpty() && this.jtxp_tipoEquipo.getText().isEmpty() && this.jtxp_marca.getText().isEmpty() && this.jtxp_serialN.getText().isEmpty()) {
+                    JOptionPane.showMessageDialog(rootPane, "ID Equipo no encontrado, favor verificar", "Atención", JOptionPane.WARNING_MESSAGE);
+                } else {
+
+                    int idEq = Integer.parseInt(this.jtxt_idEquipo.getText());
+                    int idUsua = Integer.parseInt(this.jtxt_usuario.getText());
+
+                    proceso.setId_equipo(idEq);
+                    proceso.setId_usuario(idUsua);
+
+                    try {
+
+                        ingEquip.agregarProceso(proceso);
+                        JOptionPane.showMessageDialog(rootPane, "Proceso Ingresado", "", JOptionPane.INFORMATION_MESSAGE);
+                        this.dispose();
+
+                    } catch (HeadlessException e) {
+                        JOptionPane.showMessageDialog(rootPane, "Proceso No Ingresado", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+
+                }
+            }
+        }
+
         //controlador.ContIngresar proceso = new controlador.ContIngresar();
-        
+
         
     }//GEN-LAST:event_jtbn_guardarActionPerformed
 
