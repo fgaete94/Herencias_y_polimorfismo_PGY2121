@@ -4,9 +4,14 @@
  */
 package vistas;
 
+import bbdd.Conexion;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Vector;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -39,6 +44,41 @@ public class Buscar extends javax.swing.JFrame {
        
 
     }
+    
+      public void cargarprcoeso() {
+        DefaultTableModel modelo = (DefaultTableModel) jtab_buscarProceso.getModel();
+        modelo.setRowCount(0);
+
+        try {
+            // Aquí creamos el objeto conexion de la Clase Conexion
+            Conexion conexion = new Conexion();
+            Connection cnt = conexion.obtenerConexionOracle();
+            String query = "SELECT E.ID_EQUIPO, TIP.TIPO_EQUIPÓ, E.MODELO,M.NOMBRE_MARCA, TP.NOMBRE, to_char(P.FECHA,'dd/MM/yyyy hh24:mi'), U.NOMBRE_USUARIO FROM PROCESO P JOIN EQUIPO E ON (P.ID_EQUIPO = E.ID_EQUIPO) JOIN MARCA M ON (E.ID_MARCA = M.ID_MARCA) JOIN TIPO_EQUIPO TIP ON (TIP.ID_TIPO_EQUIPO = E.ID_TIPO_EQUIPO) JOIN TIPO_PROCESO TP ON (TP.ID_TIPO_PROCESO = P.ID_TIPO_PROCESO) JOIN USUARIO U ON (P.ID_USUARIO = U.ID_USUARIO) ORDER BY 6 DESC";
+            PreparedStatement pstmt = cnt.prepareStatement(query);
+            ResultSet rst = pstmt.executeQuery();
+
+            while (rst.next()) {
+                Vector v = new Vector();
+                v.add(rst.getInt(1));
+                v.add(rst.getString(2));
+                v.add(rst.getString(3));
+                v.add(rst.getString(4));
+                v.add(rst.getString(5));
+                v.add(rst.getString(6));
+                v.add(rst.getString(7));
+                modelo.addRow(v);
+
+            }
+            jtab_buscarProceso.setModel(modelo);
+
+            rst.close();
+            pstmt.close();
+            cnt.close();
+
+        } catch (Exception e) {
+            System.out.println("Error de SQL al consultar proceso" + e.getMessage());
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -64,8 +104,9 @@ public class Buscar extends javax.swing.JFrame {
         jlbl_numeroSerie = new javax.swing.JLabel();
         jlbl_setNumeroSerie = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        Jtab_buscarProceso = new javax.swing.JTable();
+        jtab_buscarProceso = new javax.swing.JTable();
         jbtn_volver = new javax.swing.JButton();
+        jbtn_limpiar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Buscar");
@@ -93,6 +134,7 @@ public class Buscar extends javax.swing.JFrame {
         jbtn_mostrarEquipos.setBackground(new java.awt.Color(0, 0, 102));
         jbtn_mostrarEquipos.setForeground(new java.awt.Color(255, 255, 255));
         jbtn_mostrarEquipos.setText("Mostrar Todos");
+        jbtn_mostrarEquipos.setBorder(new javax.swing.border.MatteBorder(null));
         jbtn_mostrarEquipos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbtn_mostrarEquiposActionPerformed(evt);
@@ -127,30 +169,23 @@ public class Buscar extends javax.swing.JFrame {
 
         jlbl_setNumeroSerie.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 0, 14)); // NOI18N
 
-        Jtab_buscarProceso.setModel(new javax.swing.table.DefaultTableModel(
+        jtab_buscarProceso.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID Equipo", "Nombre Equipo", "Número de Serie", "Nombre Marca", "Nombre Proceso", "Nombre Usuario"
+                "ID Equipo", "Nombre Equipo", "Número de Serie", "Nombre Marca", "Nombre Proceso", "Fecha", "Nombre Usuario"
             }
         ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(Jtab_buscarProceso);
+        jScrollPane1.setViewportView(jtab_buscarProceso);
 
         jbtn_volver.setBackground(new java.awt.Color(0, 0, 102));
         jbtn_volver.setForeground(new java.awt.Color(255, 255, 255));
@@ -162,45 +197,64 @@ public class Buscar extends javax.swing.JFrame {
             }
         });
 
+        jbtn_limpiar.setBackground(new java.awt.Color(0, 0, 102));
+        jbtn_limpiar.setForeground(new java.awt.Color(255, 255, 255));
+        jbtn_limpiar.setText("Limpiar");
+        jbtn_limpiar.setBorder(new javax.swing.border.MatteBorder(null));
+        jbtn_limpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtn_limpiarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jbtn_volver, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 760, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jlbl_marcaEquipo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jlbl_nombreEquipo, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jlbl_setNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jlbl_setMarcaEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(18, 18, 18)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jlbl_tipoProceso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jlbl_modelo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jlbl_setModeloEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jlbl_setTipoProceso, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(18, 18, 18)
-                            .addComponent(jlbl_numeroSerie)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jlbl_setNumeroSerie, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jlbl_ingresarId, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jtxt_ingresarIdEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jbtn_buscarEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(jbtn_mostrarEquipos, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jlbl_marcaEquipo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jlbl_nombreEquipo, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jlbl_setNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jlbl_setMarcaEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jlbl_tipoProceso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jlbl_modelo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jlbl_setModeloEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jlbl_setTipoProceso, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jlbl_numeroSerie)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jlbl_setNumeroSerie, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jlbl_ingresarId, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jtxt_ingresarIdEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jbtn_buscarEquipo, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jbtn_mostrarEquipos, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(217, 217, 217))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 912, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(118, 118, 118)
+                        .addComponent(jbtn_limpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jbtn_volver, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(152, 152, 152)))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -225,10 +279,12 @@ public class Buscar extends javax.swing.JFrame {
                     .addComponent(jlbl_marcaEquipo)
                     .addComponent(jlbl_setTipoProceso, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)
                     .addComponent(jlbl_tipoProceso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jbtn_volver, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbtn_volver, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbtn_limpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30))
         );
 
@@ -245,7 +301,7 @@ public class Buscar extends javax.swing.JFrame {
 
         controlador.ContBuscarEquipo buscar = new controlador.ContBuscarEquipo();
         controlador.ContProceso proceso = new controlador.ContProceso();
-        DefaultTableModel modelo = (DefaultTableModel) Jtab_buscarProceso.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) jtab_buscarProceso.getModel();
         Equipo equip = new Equipo();
         TipoEquipo tipoEquip = new TipoEquipo();
         Marca marc = new Marca();
@@ -315,7 +371,8 @@ public class Buscar extends javax.swing.JFrame {
 
     private void jbtn_mostrarEquiposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_mostrarEquiposActionPerformed
 
-        controlador.ContBuscarEquipo buscarEquipos = new controlador.ContBuscarEquipo(); // Crear una instancia del controlador
+           cargarprcoeso();
+        /* controlador.ContBuscarEquipo buscarEquipos = new controlador.ContBuscarEquipo(); // Crear una instancia del controlador
         ArrayList<Proceso> listaEquipos = buscarEquipos.buscarEquipoLista(); // Llamar al método buscarEquipoLista
 
         // Creamos un modelo de tabla para manejar los datos
@@ -349,8 +406,9 @@ public class Buscar extends javax.swing.JFrame {
         }
 
         // Asignamos el modelo de tabla a la JTable
-        Jtab_buscarProceso.setModel(modeloTabla);
+        jtab_buscarProceso.setModel(modeloTabla);*/
 
+        // aqui viene codigo que finalmente no se utilizo
         //        controlador.ContBuscarEquipo buscar = new controlador.ContBuscarEquipo();
         //        controlador.ContProceso info = new controlador.ContProceso();
         //        bbdd.Conexion conec = new bbdd.Conexion();
@@ -371,61 +429,61 @@ public class Buscar extends javax.swing.JFrame {
         //
         //        listaequipos = buscar.buscarEquipoLista();
         //        for (Proceso proce : listaequipos) {
-            //            String a,b,c,d,e,f;
-            //            TipoEquipo tipoEquipo = new TipoEquipo();
-            //            TipoProceso tipoProceso = new TipoProceso();
-            //            Proceso proceso = new Proceso();
-            //            Equipo equipo = new Equipo();
-            //            Marca mrc = new Marca();
-            //            Usuario user = new Usuario();
-            //
-            //            proceso = buscar.buscarproceso(proce.getId_proceso());
-            //            a = String.valueOf(proceso.getId_equipo());
-            //
-            //            equipo = info.buscarenProceso(String.valueOf(proceso.getId_equipo()));
-            //
-            //            tipoEquipo =  info.buscartipo(equipo.getId_tipo_equipo());
-            //            b = tipoEquipo.getTipo_equipo();
-            //            c=equipo.getNumero_serie();
-            //
-            //            mrc= info.marca(equipo.getId_marca());
-            //            d = mrc.getNombre_marca();
-            //
-            //            tipoProceso = buscar.buscarTipoProceso(proceso.getId_tipo_proceso());
-            //            e = tipoProceso.getNombre();
-            //
-            //            user = buscar.buscarUsuario(proceso.getId_usuario());
-            //            f = user.getNombre_usuario();
-            //
-            //            String [] datos = {a,b,c,d,e,f};
-            //            modelo.addRow(datos);
-            //        }
+        //            String a,b,c,d,e,f;
+        //            TipoEquipo tipoEquipo = new TipoEquipo();
+        //            TipoProceso tipoProceso = new TipoProceso();
+        //            Proceso proceso = new Proceso();
+        //            Equipo equipo = new Equipo();
+        //            Marca mrc = new Marca();
+        //            Usuario user = new Usuario();
+        //
+        //            proceso = buscar.buscarproceso(proce.getId_proceso());
+        //            a = String.valueOf(proceso.getId_equipo());
+        //
+        //            equipo = info.buscarenProceso(String.valueOf(proceso.getId_equipo()));
+        //
+        //            tipoEquipo =  info.buscartipo(equipo.getId_tipo_equipo());
+        //            b = tipoEquipo.getTipo_equipo();
+        //            c=equipo.getNumero_serie();
+        //
+        //            mrc= info.marca(equipo.getId_marca());
+        //            d = mrc.getNombre_marca();
+        //
+        //            tipoProceso = buscar.buscarTipoProceso(proceso.getId_tipo_proceso());
+        //            e = tipoProceso.getNombre();
+        //
+        //            user = buscar.buscarUsuario(proceso.getId_usuario());
+        //            f = user.getNombre_usuario();
+        //
+        //            String [] datos = {a,b,c,d,e,f};
+        //            modelo.addRow(datos);
+        //        }
         ////        idEquipo = this.jtxt_ingresarIdEquipo.getText();
         ////
         ////        listaequipos = buscar.buscarEquipoLista(idEquipo);
         ////
         ////        for (Proceso equip : listaequipos) {
-            ////
-            ////            int idequip;
-            ////            String model,sn,mar,pro,us;
-            ////            proceso = equip;
-            ////            equipo = buscar.buscarEquipo(proceso.getId_equipo());
-            ////            tipoProceso = buscar.buscarTipoProceso(proceso.getId_tipo_proceso());
-            ////            mrc = info.marca(equipo.getId_marca());
-            ////            user= buscar.buscarUsuario(proceso.getId_usuario());
-            ////            tipoEquipo= info.buscartipo(equipo.getId_tipo_equipo());
-            ////
-            ////            idequip=proceso.getId_equipo();
-            ////            model=tipoEquipo.getTipo_equipo();
-            ////            sn=equipo.getNumero_serie();
-            ////            mar= mrc.getNombre_marca();
-            ////            pro=tipoProceso.getNombre();
-            ////            us=user.getNombre_usuario();
-            ////            String [] datos ={String.valueOf(idequip),model,sn,mar,pro,us};
-            ////            modelo.addRow(datos);
-            ////
-            ////
-            ////        }
+        ////
+        ////            int idequip;
+        ////            String model,sn,mar,pro,us;
+        ////            proceso = equip;
+        ////            equipo = buscar.buscarEquipo(proceso.getId_equipo());
+        ////            tipoProceso = buscar.buscarTipoProceso(proceso.getId_tipo_proceso());
+        ////            mrc = info.marca(equipo.getId_marca());
+        ////            user= buscar.buscarUsuario(proceso.getId_usuario());
+        ////            tipoEquipo= info.buscartipo(equipo.getId_tipo_equipo());
+        ////
+        ////            idequip=proceso.getId_equipo();
+        ////            model=tipoEquipo.getTipo_equipo();
+        ////            sn=equipo.getNumero_serie();
+        ////            mar= mrc.getNombre_marca();
+        ////            pro=tipoProceso.getNombre();
+        ////            us=user.getNombre_usuario();
+        ////            String [] datos ={String.valueOf(idequip),model,sn,mar,pro,us};
+        ////            modelo.addRow(datos);
+        ////
+        ////
+        ////        }
         //
         ////        //listarProcesos = buscar.buscarEquipo(idEquipo);
         ////        tipoProceso = buscar.buscarTipoProceso(tipoProceso.getId_tipo_proceso());
@@ -448,6 +506,12 @@ public class Buscar extends javax.swing.JFrame {
     private void jbtn_volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_volverActionPerformed
         this.dispose();
     }//GEN-LAST:event_jbtn_volverActionPerformed
+
+    private void jbtn_limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_limpiarActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel modelo = (DefaultTableModel) jtab_buscarProceso.getModel();
+        modelo.setRowCount(0);
+    }//GEN-LAST:event_jbtn_limpiarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -502,9 +566,9 @@ public class Buscar extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable Jtab_buscarProceso;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbtn_buscarEquipo;
+    private javax.swing.JButton jbtn_limpiar;
     private javax.swing.JButton jbtn_mostrarEquipos;
     private javax.swing.JButton jbtn_volver;
     private javax.swing.JLabel jlbl_ingresarId;
@@ -518,6 +582,7 @@ public class Buscar extends javax.swing.JFrame {
     private javax.swing.JLabel jlbl_setNumeroSerie;
     private javax.swing.JLabel jlbl_setTipoProceso;
     private javax.swing.JLabel jlbl_tipoProceso;
+    private javax.swing.JTable jtab_buscarProceso;
     private javax.swing.JTextField jtxt_ingresarIdEquipo;
     // End of variables declaration//GEN-END:variables
 }

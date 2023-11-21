@@ -5,13 +5,16 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Vector;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import modelo.Equipo;
 import modelo.Marca;
 import modelo.Proceso;
 import modelo.TipoEquipo;
 import modelo.TipoProceso;
 import modelo.Usuario;
+import vistas.Buscar;
 
 /*
  *
@@ -342,5 +345,47 @@ public class ContBuscarEquipo {
 //
 //        return listaProceso;
 //    }
+    
+//     public void cargarprcoeso() {// no funciona aca
+//        Buscar tabla = new Buscar();
+//        DefaultTableModel modelo =   (DefaultTableModel) tabla.jtab_buscarProceso.getModel();
+////        modelo.addColumn("ID Equipo");
+////        modelo.addColumn("Nombre Equipo");
+////        modelo.addColumn("Número de Serie");
+////        modelo.addColumn("Nombre Marca");
+////        modelo.addColumn("Nombre Proceso");
+////        modelo.addColumn("Nombre Usuario");
+//        modelo.setRowCount(0);
+//
+//        try {
+//            // Aquí creamos el objeto conexion de la Clase Conexion
+//            Conexion conexion = new Conexion();
+//            Connection cnt = conexion.obtenerConexionOracle();
+//            String query = "SELECT id_proceso,id_usuario,to_char(fecha,'dd/MM/yyyy hh24:mi'),id_tipo_proceso,id_equipo FROM PROCESO";
+//            PreparedStatement pstmt = cnt.prepareStatement(query);
+//            ResultSet rst = pstmt.executeQuery();
+//
+//            while (rst.next()) {
+//                Vector v = new Vector();
+//                v.add(rst.getInt(1));
+//                v.add(rst.getInt(2));
+//                v.add(rst.getString(3));
+//                v.add(rst.getInt(4));
+//                v.add(rst.getInt(5));
+//                modelo.addRow(v);;
+//
+//            }
+//            tabla.jtab_buscarProceso.setModel(modelo);
+//
+//            rst.close();
+//            pstmt.close();
+//            cnt.close();
+//
+//        } catch (Exception e) {
+//            System.out.println("Error de SQL al consultar proceso" + e.getMessage());
+//        }
+//    }
+    
+ 
     
 }
